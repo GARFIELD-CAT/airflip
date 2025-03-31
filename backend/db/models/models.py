@@ -1,10 +1,10 @@
-from datetime import datetime as dt
 import datetime
+from datetime import datetime as dt
 
-from sqlalchemy import Column, ForeignKey, Integer, String, BigInteger, DateTime
+from sqlalchemy import (BigInteger, Column, DateTime, ForeignKey, Integer,
+                        String)
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
-
 
 Base = declarative_base()
 
@@ -23,6 +23,9 @@ class Account(Base):
 
     transactions = relationship(
         "Transaction", back_populates="accounts", lazy="subquery"
+    )
+    bonus_levels = relationship(
+        "BonusLevel", back_populates="accounts", lazy="subquery"
     )
 
     def __repr__(self):
@@ -63,7 +66,7 @@ class Transaction(Base):
     __tablename__ = "transactions"
 
     id = Column(Integer, primary_key=True, index=True)
-    hash = Column(String(256), index=True)
+    hash = Column(String(256), index=True, unique=True)
     token_from = Column(String(256))
     token_to = Column(String(256))
     amount_from = Column(BigInteger)
@@ -72,6 +75,8 @@ class Transaction(Base):
     chain_to = Column(Integer)
     transaction_date = Column(DateTime, default=dt.now(datetime.UTC))
     account = Column(Integer, ForeignKey("accounts.id", ondelete="CASCADE"))
+
+    accounts = relationship("Account", back_populates="transactions", lazy="subquery")
 
     def __repr__(self):
         return (

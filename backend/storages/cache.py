@@ -7,7 +7,7 @@ COMPONENT_NAME = "cache_storage"
 
 class CacheStorage:
     def __init__(self, host: str, port: int):
-        self.redis = Redis(host=host, port=port)
+        self.redis = Redis(host=host, port=port, decode_responses=True)
 
     async def set(self, key: str, value: str, expire_time: int = 60) -> None:
         await self.redis.set(self._redis_key(key), value, ex=expire_time)

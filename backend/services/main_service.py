@@ -5,7 +5,7 @@ from backend.db.models.models import Base
 
 
 class MainService:
-    def __init__(self, db_url: str = "sqlite+aiosqlite:///./student.db"):
+    def __init__(self, db_url: str = "sqlite+aiosqlite:///db/student.db"):
         self._db_url = db_url
         self._engine = create_async_engine(self._db_url)
 
