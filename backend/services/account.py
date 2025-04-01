@@ -1,10 +1,10 @@
 import logging
-from typing import Optional
+from typing import List, Optional
 
 from sqlalchemy import delete, select
 from sqlalchemy.exc import IntegrityError
 
-from backend.db.models.models import Account
+from backend.db.models.models import Account, Transaction
 from backend.services.bonus_level import bonus_level_service
 from backend.services.main_service import MainService
 
@@ -117,6 +117,22 @@ class AccountService(MainService):
             await db.commit()
 
             return account
+
+    async def get_transactions_by_account_id(
+        self, account_id: int
+    ) -> List[Transaction]:
+        session = self._get_async_session()
+
+        async with session() as db:
+            account = await db.execute(
+                select(Account).where(Account.id == account_id)
+            )
+            account = account.scalars().one_or_none()
+
+            if not account:
+                return []
+
+            return account.transactions
 
 
 account_service = AccountService()

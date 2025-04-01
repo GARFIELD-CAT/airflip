@@ -6,7 +6,7 @@ from typing import List, Optional
 from sqlalchemy import delete, select
 from sqlalchemy.exc import IntegrityError
 
-from backend.db.models.models import Transaction
+from backend.db.models.models import Account, Transaction
 from backend.services.account import account_service
 from backend.services.main_service import MainService
 
