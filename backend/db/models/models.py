@@ -1,8 +1,14 @@
 import datetime
 from datetime import datetime as dt
 
-from sqlalchemy import (BigInteger, Column, DateTime, ForeignKey, Integer,
-                        String)
+from sqlalchemy import (
+    BigInteger,
+    Column,
+    DateTime,
+    ForeignKey,
+    Integer,
+    String,
+)
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 

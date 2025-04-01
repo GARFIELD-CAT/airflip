@@ -1,5 +1,5 @@
 import logging
-from typing import Optional
+from typing import List, Optional
 
 from sqlalchemy import delete, select
 from sqlalchemy.exc import IntegrityError
@@ -23,8 +23,9 @@ class BonusLevelService(MainService):
                 db.add(bonus_level)
                 await db.commit()
 
+            bonus_level_ = bonus_level.as_dict()
             logger.info(
-                f"BonusLevel c параметрами: {bonus_level=} успешно создан."
+                f"BonusLevel c параметрами: {bonus_level_=} успешно создан."
             )
 
             return bonus_level
@@ -40,11 +41,11 @@ class BonusLevelService(MainService):
         session = self._get_async_session()
 
         async with session() as db:
-            faculty = await db.execute(
+            bonus_level = await db.execute(
                 select(BonusLevel).where(BonusLevel.id == bonus_level_id)
             )
 
-            return faculty.scalars().one_or_none()
+            return bonus_level.scalars().one_or_none()
 
     async def delete_bonus_level(self, bonus_level_id: int) -> None:
         session = self._get_async_session()
@@ -83,7 +84,17 @@ class BonusLevelService(MainService):
 
             await db.commit()
 
+            logger.info(f"BonusLevel c {bonus_level_id=} успешно обновлен.")
+
             return bonus_level
+
+    async def get_bonus_levels(self) -> List[BonusLevel]:
+        session = self._get_async_session()
+
+        async with session() as db:
+            bonus_level = await db.execute(select(BonusLevel))
+
+            return bonus_level.scalars().all()
 
 
 bonus_level_service = BonusLevelService()
