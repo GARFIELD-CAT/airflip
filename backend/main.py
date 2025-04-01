@@ -16,7 +16,7 @@ app = FastAPI(title="my_api")
 
 app.include_router(bonus_level_router, prefix="/api/v1/bonus_levels")
 app.include_router(account_router, prefix="/api/v1/accounts")
-app.include_router(transaction_router, prefix="/api/v1/transaction_router")
+app.include_router(transaction_router, prefix="/api/v1/transactions")
 
 
 if __name__ == "__main__":

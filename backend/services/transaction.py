@@ -8,7 +8,10 @@ from sqlalchemy.exc import IntegrityError
 
 from backend.db.models.models import Transaction
 from backend.services.account import account_service
+from backend.services.bonus_level import bonus_level_service
 from backend.services.main_service import MainService
+
+BONUS_COEFFICIENT = 0.03
 
 logger = logging.getLogger(__name__)
 
@@ -47,11 +50,29 @@ class TransactionService(MainService):
                     chain_to=chain_to,
                     transaction_date=transaction_date,
                 )
+                current_bonus_amount = (
+                    account.bonus_amount
+                    + self._calculate_bonus_amount(amount_to)
+                )
+                account.bonus_amount = current_bonus_amount
+
+                bonus_level = await bonus_level_service.get_bonus_levels_for_bonus_amount(  # noqa: 501
+                    current_bonus_amount
+                )
+
+                if bonus_level:
+                    account.bonus_level = bonus_level.id
 
                 db.add(transaction)
+                db.add(account)
                 await db.commit()
 
             transaction_ = transaction.as_dict()
+
+            logger.info(
+                f"Аккаунту с {account.id=} обновлено значение "
+                f"{current_bonus_amount=}"
+            )
             logger.info(
                 f"Transaction c параметрами: {transaction_=} успешно создан."
             )
@@ -143,6 +164,10 @@ class TransactionService(MainService):
             transactions = await db.execute(select(Transaction))
 
             return transactions.scalars().all()
+
+    @staticmethod
+    def _calculate_bonus_amount(amount_to: int):
+        return amount_to * 0.03
 
 
 transaction_service = TransactionService()

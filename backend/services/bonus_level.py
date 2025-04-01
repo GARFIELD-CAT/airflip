@@ -1,7 +1,7 @@
 import logging
 from typing import List, Optional
 
-from sqlalchemy import delete, select
+from sqlalchemy import delete, desc, select
 from sqlalchemy.exc import IntegrityError
 
 from backend.db.models.models import BonusLevel
@@ -95,6 +95,21 @@ class BonusLevelService(MainService):
             bonus_levels = await db.execute(select(BonusLevel))
 
             return bonus_levels.scalars().all()
+
+    async def get_bonus_levels_for_bonus_amount(
+        self, bonus_amount: float
+    ) -> BonusLevel:
+        session = self._get_async_session()
+
+        async with session() as db:
+            bonus_levels = await db.execute(
+                select(BonusLevel)
+                .where(BonusLevel.amount_required < bonus_amount)
+                .order_by(desc(BonusLevel.amount_required))
+                .limit(1)
+            )
+
+            return bonus_levels.scalars().first()
 
 
 bonus_level_service = BonusLevelService()
