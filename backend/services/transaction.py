@@ -51,8 +51,9 @@ class TransactionService(MainService):
                 db.add(transaction)
                 await db.commit()
 
+            transaction_ = transaction.as_dict()
             logger.info(
-                f"Transaction c параметрами: {transaction=} успешно создан."
+                f"Transaction c параметрами: {transaction_=} успешно создан."
             )
 
             return transaction
@@ -116,6 +117,16 @@ class TransactionService(MainService):
             if transaction is None:
                 logger.error(f"Transaction c {transaction_id=} не найден.")
                 raise ValueError(f"Transaction c {transaction_id=} не найден.")
+
+            account_id = kwargs.get("account", None)
+
+            if account_id:
+                account = await account_service.get_account(
+                    account_id=account_id
+                )
+
+                if account is None:
+                    raise ValueError(f"Account c {account_id=} не найден.")
 
             for key, value in kwargs.items():
                 if value:
