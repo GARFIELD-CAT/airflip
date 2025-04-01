@@ -6,7 +6,7 @@ from typing import List
 from fastapi import APIRouter, HTTPException
 
 from backend.schemes.bonus_level import (
-    RequestBonusLevel,
+    CreateBonusLevel,
     ResponseBonusLevel,
     UpdateBonusLevel,
 )
@@ -24,7 +24,7 @@ logger = logging.getLogger(__name__)
     status_code=HTTPStatus.CREATED,
     response_model=ResponseBonusLevel,
 )
-async def create_bonus_level(input: RequestBonusLevel):
+async def create_bonus_level(input: CreateBonusLevel):
     try:
         bonus_level = await bonus_level_service.create_bonus_level(
             name=input.name,
@@ -47,7 +47,7 @@ async def get_bonus_level(id: int):
     if bonus_level:
         bonus_level_ = json.loads(bonus_level)
         logger.debug(f"BonusLevel {bonus_level_=} получен из кэша.")
-        return json.loads(bonus_level)
+        return bonus_level_
     else:
         bonus_level = await bonus_level_service.get_bonus_level(id)
 

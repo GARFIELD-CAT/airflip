@@ -46,7 +46,8 @@ class AccountService(MainService):
                 db.add(account)
                 await db.commit()
 
-            logger.info(f"Account c параметрами: {account=} успешно создан.")
+            account_ = account.as_dict()
+            logger.info(f"Account c параметрами: {account_=} успешно создан.")
 
             return account
         except IntegrityError:
@@ -58,7 +59,7 @@ class AccountService(MainService):
     async def get_account(
         self,
         account_id: Optional[int] = None,
-        wallet_key: Optional[int] = None,
+        wallet_key: Optional[str] = None,
     ) -> Optional[Account]:
         session = self._get_async_session()
 
@@ -110,6 +111,18 @@ class AccountService(MainService):
                 logger.error(f"Account c {account_id=} не найден.")
                 raise ValueError(f"Account c {account_id=} не найден.")
 
+            bonus_level_id = kwargs.get("bonus_level", None)
+
+            if bonus_level_id:
+                bonus_level = await bonus_level_service.get_bonus_level(
+                    bonus_level_id=bonus_level_id
+                )
+
+                if bonus_level is None:
+                    raise ValueError(
+                        f"BonusLevel c {bonus_level_id=} не найден."
+                    )
+
             for key, value in kwargs.items():
                 if value:
                     setattr(account, key, value)
@@ -133,6 +146,14 @@ class AccountService(MainService):
                 return []
 
             return account.transactions
+
+    async def get_accounts(self) -> List[Account]:
+        session = self._get_async_session()
+
+        async with session() as db:
+            accounts = await db.execute(select(Account))
+
+            return accounts.scalars().all()
 
 
 account_service = AccountService()

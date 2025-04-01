@@ -92,9 +92,9 @@ class BonusLevelService(MainService):
         session = self._get_async_session()
 
         async with session() as db:
-            bonus_level = await db.execute(select(BonusLevel))
+            bonus_levels = await db.execute(select(BonusLevel))
 
-            return bonus_level.scalars().all()
+            return bonus_levels.scalars().all()
 
 
 bonus_level_service = BonusLevelService()

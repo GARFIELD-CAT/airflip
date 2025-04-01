@@ -3,7 +3,7 @@ import re
 from pydantic import BaseModel, Field, field_validator
 
 
-class RequestBonusLevel(BaseModel):
+class CreateBonusLevel(BaseModel):
     name: str = Field(description="Название бонуса")
     amount_required: int = Field(
         description="Сумма необходимая для получения бонуса", default=0
@@ -12,6 +12,7 @@ class RequestBonusLevel(BaseModel):
     @field_validator("name", mode="before")
     def validate_name(cls, value):
         pattern = r"^[А-ЯЁ][а-яё\s]+$"
+
         if not re.match(pattern, value):
             raise ValueError(
                 "Название бонуса должно начинаться с большой буквы "
@@ -38,6 +39,6 @@ class ResponseBonusLevel(BaseModel):
     )
 
 
-class UpdateBonusLevel(RequestBonusLevel):
+class UpdateBonusLevel(CreateBonusLevel):
     name: str = None
     amount_required: int = None
