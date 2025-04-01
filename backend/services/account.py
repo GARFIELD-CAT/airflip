@@ -1,7 +1,7 @@
 import logging
 from typing import List, Optional
 
-from sqlalchemy import delete, select
+from sqlalchemy import asc, delete, desc, select
 from sqlalchemy.exc import IntegrityError
 
 from backend.db.models.models import Account, Transaction
@@ -132,7 +132,11 @@ class AccountService(MainService):
             return account
 
     async def get_transactions_by_account_id(
-        self, account_id: int
+        self,
+        account_id: int,
+        sort_desc: bool = True,
+        skip: int = 0,
+        limit: int = 25,
     ) -> List[Transaction]:
         session = self._get_async_session()
 
@@ -145,7 +149,24 @@ class AccountService(MainService):
             if not account:
                 return []
 
-            return account.transactions
+            if sort_desc:
+                transactions = await db.execute(
+                    select(Transaction)
+                    .where(Transaction.account == account_id)
+                    .order_by(desc(Transaction.transaction_date))
+                    .offset(skip)
+                    .limit(limit)
+                )
+            else:
+                transactions = await db.execute(
+                    select(Transaction)
+                    .where(Transaction.account == account_id)
+                    .order_by(asc(Transaction.transaction_date))
+                    .offset(skip)
+                    .limit(limit)
+                )
+
+            return transactions.scalars().all()
 
     async def get_accounts(self) -> List[Account]:
         session = self._get_async_session()

@@ -10,6 +10,7 @@ from backend.schemes.account import (
     ResponseAccount,
     UpdateAccount,
 )
+from backend.schemes.transaction import ResponseTransaction
 from backend.services.account import account_service
 from backend.storages.cache import cache_storage
 
@@ -152,9 +153,11 @@ async def get_accounts():
 @account_router.get(
     "/get_transactions_by_wallet_key",
     status_code=HTTPStatus.OK,
-    response_model=List[ResponseAccount],
+    response_model=List[ResponseTransaction],
 )
-async def get_transactions_by_wallet_key(wallet_key: str):
+async def get_transactions_by_wallet_key(
+    wallet_key: str, sort_desc: bool = True, skip: int = 0, limit: int = 25
+):
     account = await account_service.get_account(wallet_key=wallet_key)
 
     if account is None:
@@ -164,7 +167,7 @@ async def get_transactions_by_wallet_key(wallet_key: str):
         )
 
     transactions = await account_service.get_transactions_by_account_id(
-        account.id
+        account_id=account.id, sort_desc=sort_desc, skip=skip, limit=limit
     )
 
     return transactions
