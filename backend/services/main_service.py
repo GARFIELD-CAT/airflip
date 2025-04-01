@@ -3,9 +3,11 @@ from sqlalchemy.orm import sessionmaker
 
 from backend.db.models.models import Base
 
+DB_URL = "sqlite+aiosqlite:///db/student.db"
+
 
 class MainService:
-    def __init__(self, db_url: str = "sqlite+aiosqlite:///db/student.db"):
+    def __init__(self, db_url: str = DB_URL):
         self._db_url = db_url
         self._engine = create_async_engine(self._db_url)
 

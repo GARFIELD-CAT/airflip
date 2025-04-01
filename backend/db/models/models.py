@@ -1,14 +1,8 @@
 import datetime
 from datetime import datetime as dt
 
-from sqlalchemy import (
-    BigInteger,
-    Column,
-    DateTime,
-    ForeignKey,
-    Integer,
-    String,
-)
+from sqlalchemy import (BigInteger, Column, DateTime, ForeignKey, Integer,
+                        String)
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 
@@ -83,7 +77,9 @@ class Transaction(Base):
     chain_from = Column(Integer)
     chain_to = Column(Integer)
     transaction_date = Column(DateTime, default=dt.now(datetime.UTC))
-    account = Column(Integer, ForeignKey("accounts.id", ondelete="CASCADE"))
+    account = Column(
+        Integer, ForeignKey("accounts.id", ondelete="CASCADE"), nullable=False
+    )
 
     accounts = relationship(
         "Account", back_populates="transactions", lazy="subquery"

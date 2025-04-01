@@ -46,10 +46,7 @@ class AccountService(MainService):
                 db.add(account)
                 await db.commit()
 
-            logger.info(
-                f"Account c {wallet_key=}, {bonus_amount=} и "
-                f"{bonus_level_id=} успешно создан."
-            )
+            logger.info(f"Account c параметрами: {account=} успешно создан.")
 
             return account
         except IntegrityError:

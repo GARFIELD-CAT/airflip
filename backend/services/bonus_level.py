@@ -24,7 +24,7 @@ class BonusLevelService(MainService):
                 await db.commit()
 
             logger.info(
-                f"BonusLevel c {name=} и {amount_required=} успешно создан."
+                f"BonusLevel c параметрами: {bonus_level=} успешно создан."
             )
 
             return bonus_level
