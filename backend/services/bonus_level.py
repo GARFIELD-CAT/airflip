@@ -11,7 +11,9 @@ logger = logging.getLogger(__name__)
 
 
 class BonusLevelService(MainService):
-    async def create_bonus_level(self, name: str, amount_required: int) -> BonusLevel:
+    async def create_bonus_level(
+        self, name: str, amount_required: int
+    ) -> BonusLevel:
         session = self._get_async_session()
 
         bonus_level = BonusLevel(name=name, amount_required=amount_required)
@@ -21,7 +23,9 @@ class BonusLevelService(MainService):
                 db.add(bonus_level)
                 await db.commit()
 
-            logger.info(f"BonusLevel c {name=} и {amount_required=} успешно создан.")
+            logger.info(
+                f"BonusLevel c {name=} и {amount_required=} успешно создан."
+            )
 
             return bonus_level
         except IntegrityError:
@@ -30,7 +34,9 @@ class BonusLevelService(MainService):
             logger.error(f"BonusLevel c {name=} уже создан.")
             raise ValueError(f"BonusLevel с {name=} уже создан.")
 
-    async def get_bonus_level(self, bonus_level_id: int) -> Optional[BonusLevel]:
+    async def get_bonus_level(
+        self, bonus_level_id: int
+    ) -> Optional[BonusLevel]:
         session = self._get_async_session()
 
         async with session() as db:
@@ -56,7 +62,9 @@ class BonusLevelService(MainService):
                 logger.error(f"BonusLevel c {bonus_level_id=} не найден.")
                 raise ValueError(f"BonusLevel c {bonus_level_id=} не найден.")
 
-    async def update_bonus_level(self, bonus_level_id: int, **kwargs) -> BonusLevel:
+    async def update_bonus_level(
+        self, bonus_level_id: int, **kwargs
+    ) -> BonusLevel:
         session = self._get_async_session()
 
         async with session() as db:

@@ -1,8 +1,14 @@
 import datetime
 from datetime import datetime as dt
 
-from sqlalchemy import (BigInteger, Column, DateTime, ForeignKey, Integer,
-                        String)
+from sqlalchemy import (
+    BigInteger,
+    Column,
+    DateTime,
+    ForeignKey,
+    Integer,
+    String,
+)
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 
@@ -17,8 +23,8 @@ class Account(Base):
     bonus_amount = Column(Integer)
     bonus_level = Column(
         Integer,
-        ForeignKey("bonus_levels.id", ondelete="SET DEFAULT"),
-        default="Не указан",
+        ForeignKey("bonus_levels.id", ondelete="SET NULL"),
+        nullable=True,
     )
 
     transactions = relationship(
@@ -30,7 +36,8 @@ class Account(Base):
 
     def __repr__(self):
         return (
-            f"{self.id} - {self.wallet_key} - {self.bonus_amount} - {self.bonus_level}"
+            f"{self.id} - {self.wallet_key} - "
+            f"{self.bonus_amount} - {self.bonus_level}"
         )
 
     def as_dict(self):
@@ -49,7 +56,9 @@ class BonusLevel(Base):
     name = Column(String(256), unique=True)
     amount_required = Column(Integer)
 
-    accounts = relationship("Account", back_populates="bonus_levels", lazy="subquery")
+    accounts = relationship(
+        "Account", back_populates="bonus_levels", lazy="subquery"
+    )
 
     def __repr__(self):
         return f"{self.id} - {self.name} - {self.amount_required}"
@@ -76,7 +85,9 @@ class Transaction(Base):
     transaction_date = Column(DateTime, default=dt.now(datetime.UTC))
     account = Column(Integer, ForeignKey("accounts.id", ondelete="CASCADE"))
 
-    accounts = relationship("Account", back_populates="transactions", lazy="subquery")
+    accounts = relationship(
+        "Account", back_populates="transactions", lazy="subquery"
+    )
 
     def __repr__(self):
         return (
