@@ -20,11 +20,11 @@ class TransactionService(MainService):
         account_id: int,
         token_from: str,
         token_to: str,
-        amount_from: str,
-        amount_to: str,
-        chain_from: str,
-        chain_to: str,
-        transaction_date: datetime.datetime = dt.now(datetime.UTC),
+        amount_from: int,
+        amount_to: int,
+        chain_from: int,
+        chain_to: int,
+        transaction_date: datetime = dt.now(datetime.UTC),
     ) -> Transaction:
         session = self._get_async_session()
 
@@ -66,7 +66,7 @@ class TransactionService(MainService):
     async def get_transaction(
         self,
         transaction_id: Optional[int] = None,
-        hash: Optional[int] = None,
+        hash: Optional[str] = None,
     ) -> Optional[Transaction]:
         session = self._get_async_session()
 

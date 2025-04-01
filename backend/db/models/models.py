@@ -89,7 +89,7 @@ class Transaction(Base):
 
     accounts = relationship(
         "Account", back_populates="transactions", lazy="subquery"
-    )
+    )  # type: ignore
 
     def __repr__(self):
         return (
