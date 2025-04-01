@@ -15,7 +15,7 @@ class AccountService(MainService):
     async def create_account(
         self,
         wallet_key: str,
-        bonus_amount: int = 0,
+        bonus_amount: float = 0,
         bonus_level_id: Optional[int] = None,
     ) -> Account:
         session = self._get_async_session()

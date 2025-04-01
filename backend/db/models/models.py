@@ -5,6 +5,7 @@ from sqlalchemy import (
     BigInteger,
     Column,
     DateTime,
+    Float,
     ForeignKey,
     Integer,
     String,
@@ -20,7 +21,7 @@ class Account(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     wallet_key = Column(String(256), index=True, unique=True)
-    bonus_amount = Column(Integer)
+    bonus_amount = Column(Float)
     bonus_level = Column(
         Integer,
         ForeignKey("bonus_levels.id", ondelete="SET NULL"),

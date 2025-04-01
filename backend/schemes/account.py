@@ -6,9 +6,7 @@ from pydantic import BaseModel, Field, field_validator
 
 class CreateAccount(BaseModel):
     wallet_key: str = Field(description="Ключ кошелька")
-    bonus_amount: int = Field(
-        description="Сумма бонусов у пользователя", default=0
-    )
+    bonus_amount: float = Field(description="Сумма бонусов у пользователя")
     bonus_level: Optional[int] = Field(
         description="Уровень пользователя в бонусной системе", default=None
     )
@@ -37,7 +35,7 @@ class CreateAccount(BaseModel):
 class ResponseAccount(BaseModel):
     id: int = Field(description="Id пользователя")
     wallet_key: str = Field(description="Ключ кошелька")
-    bonus_amount: int = Field(description="Сумма бонусов у пользователя")
+    bonus_amount: float = Field(description="Сумма бонусов у пользователя")
     bonus_level: Optional[int] = Field(
         description="Уровень пользователя в бонусной системе"
     )
@@ -45,5 +43,5 @@ class ResponseAccount(BaseModel):
 
 class UpdateAccount(CreateAccount):
     wallet_key: Optional[str] = None
-    bonus_amount: Optional[int] = None
+    bonus_amount: Optional[float] = None
     bonus_level: Optional[int] = None
