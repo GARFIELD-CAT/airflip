@@ -6,10 +6,10 @@ from typing import List, Optional
 from sqlalchemy import delete, select
 from sqlalchemy.exc import IntegrityError
 
-from backend.db.models.models import Transaction
-from backend.services.account import account_service
-from backend.services.bonus_level import bonus_level_service
-from backend.services.main_service import MainService
+from db.models.models import Transaction
+from services.account import account_service
+from services.bonus_level import bonus_level_service
+from services.main_service import MainService
 
 BONUS_COEFFICIENT = 0.03
 

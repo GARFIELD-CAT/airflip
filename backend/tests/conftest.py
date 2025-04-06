@@ -4,8 +4,8 @@ import pytest_asyncio
 from fastapi.testclient import TestClient
 from sqlalchemy.ext.asyncio import create_async_engine
 
-from backend.db.models.models import Base
-from backend.main import app
+from ..db.models.models import Base
+from ..main import app
 
 
 @pytest_asyncio.fixture(scope="function")

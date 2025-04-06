@@ -1,9 +1,10 @@
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.orm import sessionmaker
 
-from backend.db.models.models import Base
+from core.settings import settings
+from db.models.models import Base
 
-DB_URL = "sqlite+aiosqlite:///db/student.db"
+DB_URL = settings.pg_auth
 
 
 class MainService:
@@ -26,5 +27,4 @@ class MainService:
             expire_on_commit=False,
         )
 
-
-main_service = MainService()
+main_service = MainService(db_url=settings.pg_auth)

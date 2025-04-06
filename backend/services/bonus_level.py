@@ -4,8 +4,8 @@ from typing import List, Optional
 from sqlalchemy import delete, desc, select
 from sqlalchemy.exc import IntegrityError
 
-from backend.db.models.models import BonusLevel
-from backend.services.main_service import MainService
+from db.models.models import BonusLevel
+from services.main_service import MainService
 
 logger = logging.getLogger(__name__)
 

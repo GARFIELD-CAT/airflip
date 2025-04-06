@@ -2,6 +2,8 @@ from typing import Optional
 
 from redis.asyncio import Redis
 
+from core.settings import settings
+
 COMPONENT_NAME = "cache_storage"
 
 
@@ -23,4 +25,4 @@ class CacheStorage:
         return f"{COMPONENT_NAME}:{key}"
 
 
-cache_storage = CacheStorage(host="localhost", port=6379)
+cache_storage = CacheStorage(host=settings.redis_host, port=settings.redis_port)

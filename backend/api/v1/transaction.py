@@ -6,13 +6,13 @@ from typing import List
 
 from fastapi import APIRouter, HTTPException
 
-from backend.schemes.transaction import (
+from schemes.transaction import (
     CreateTransaction,
     ResponseTransaction,
     UpdateTransaction,
 )
-from backend.services.transaction import transaction_service
-from backend.storages.cache import cache_storage
+from services.transaction import transaction_service
+from storages.cache import cache_storage
 
 TRANSACTION_CACHE_PREFIX_KEY = "transaction"
 

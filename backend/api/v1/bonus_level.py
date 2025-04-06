@@ -5,13 +5,13 @@ from typing import List
 
 from fastapi import APIRouter, HTTPException
 
-from backend.schemes.bonus_level import (
+from schemes.bonus_level import (
     CreateBonusLevel,
     ResponseBonusLevel,
     UpdateBonusLevel,
 )
-from backend.services.bonus_level import bonus_level_service
-from backend.storages.cache import cache_storage
+from services.bonus_level import bonus_level_service
+from storages.cache import cache_storage
 
 BONUS_LEVEL_CACHE_PREFIX_KEY = "bonus_level"
 

@@ -5,14 +5,14 @@ from typing import List
 
 from fastapi import APIRouter, HTTPException
 
-from backend.schemes.account import (
+from schemes.account import (
     CreateAccount,
     ResponseAccount,
     UpdateAccount,
 )
-from backend.schemes.transaction import ResponseTransaction
-from backend.services.account import account_service
-from backend.storages.cache import cache_storage
+from schemes.transaction import ResponseTransaction
+from services.account import account_service
+from storages.cache import cache_storage
 
 ACCOUNT_CACHE_PREFIX_KEY = "account"
 
