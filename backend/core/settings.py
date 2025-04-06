@@ -1,10 +1,8 @@
+from pathlib import Path
 from typing import Optional
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from sqlalchemy import URL
-
-from pathlib import Path
-
 
 ENV_FILE_PATH = Path(__file__).parent.parent.parent / "config/backend/.env"
 

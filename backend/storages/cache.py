@@ -25,4 +25,6 @@ class CacheStorage:
         return f"{COMPONENT_NAME}:{key}"
 
 
-cache_storage = CacheStorage(host=settings.redis_host, port=settings.redis_port)
+cache_storage = CacheStorage(
+    host=settings.redis_host, port=settings.redis_port
+)

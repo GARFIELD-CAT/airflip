@@ -27,4 +27,5 @@ class MainService:
             expire_on_commit=False,
         )
 
+
 main_service = MainService(db_url=settings.pg_auth)

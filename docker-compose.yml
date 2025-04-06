@@ -28,21 +28,21 @@ services:
     ports:
       - 8000:8000
 
-#  migrate:
-#    volumes:
-#      - ./solution:/app
-#    env_file: ./config/solution/.env
-#    build:
-#      context: ./solution/
-#      dockerfile: Dockerfile_migrate
-#    command:
-#      - /bin/bash
-#      - -c
-#      - |
-#       alembic revision --autogenerate
-#       alembic upgrade head
-#    depends_on:
-#      - postgres
+  migrate:
+    volumes:
+      - ./backend:/backend
+    env_file: ./config/backend/.env
+    build:
+      context: ./backend/
+      dockerfile: Dockerfile_migrate
+    command:
+      - /bin/bash
+      - -c
+      - |
+       alembic revision --autogenerate
+       alembic upgrade head
+    depends_on:
+      - postgres
 
   nginx:
     image: nginx:latest
