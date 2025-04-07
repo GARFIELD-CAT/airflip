@@ -21,7 +21,7 @@ class CreateBonusLevel(BaseModel):
 
         return value
 
-    @field_validator("amount_required", mode="before")
+    @field_validator("amount_required", mode="after")
     def validate_amount_required(cls, value):
         if value < 0:
             raise ValueError(

@@ -74,6 +74,8 @@ async def delete_bonus_level(id: int):
 
         await cache_storage.delete(f"{BONUS_LEVEL_CACHE_PREFIX_KEY}:{id}")
         logger.debug(f"BonusLevel с {id=} удален из кэша.")
+
+        return None
     except ValueError as e:
         raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail=str(e))
 
