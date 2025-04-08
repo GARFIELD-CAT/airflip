@@ -6,14 +6,16 @@ from pydantic import BaseModel, Field, field_validator
 
 class CreateAccount(BaseModel):
     wallet_key: str = Field(description="Ключ кошелька")
-    bonus_amount: float = Field(description="Сумма бонусов у пользователя")
+    bonus_amount: float = Field(
+        description="Сумма бонусов у пользователя", default=0
+    )
     bonus_level: Optional[int] = Field(
         description="Уровень пользователя в бонусной системе", default=None
     )
 
     @field_validator("wallet_key", mode="before")
     def validate_wallet_key(cls, value):
-        pattern = r"[a-zA-Z0-9]+"
+        pattern = r"^[a-zA-Z0-9]+$"
 
         if not re.match(pattern, value):
             raise ValueError(
@@ -22,7 +24,7 @@ class CreateAccount(BaseModel):
 
         return value
 
-    @field_validator("bonus_amount", mode="before")
+    @field_validator("bonus_amount", mode="after")
     def validate_bonus_amount(cls, value):
         if value < 0:
             raise ValueError(

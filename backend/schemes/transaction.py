@@ -21,7 +21,7 @@ class CreateTransaction(BaseModel):
 
     @field_validator(*["hash", "token_from", "token_to"], mode="before")
     def validate_str_value(cls, value):
-        pattern = r"[a-zA-Z0-9]+"
+        pattern = r"^[a-zA-Z0-9]+$"
 
         if not re.match(pattern, value):
             raise ValueError(
@@ -30,7 +30,7 @@ class CreateTransaction(BaseModel):
 
         return value
 
-    @field_validator(*["amount_from", "amount_to"], mode="before")
+    @field_validator(*["amount_from", "amount_to"], mode="after")
     def validate_int_value(cls, value):
         if value < 0:
             raise ValueError("Поле должно быть не меньше 0")

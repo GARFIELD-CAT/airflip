@@ -73,6 +73,25 @@ import pytest
         ),
         (
             {
+                "name": "Бонус_левел_двести",
+                "amount_required": 200,
+            },
+            HTTPStatus.UNPROCESSABLE_ENTITY,
+            {
+                "detail": [
+                    {
+                        "ctx": {"error": {}},
+                        "input": "Бонус_левел_двести",
+                        "loc": ["body", "name"],
+                        "msg": "Value error, Название бонуса должно начинаться с большой "  # noqa: 501
+                        "буквы и содержать только кирилицу/пробелы",
+                        "type": "value_error",
+                    }
+                ]
+            },
+        ),
+        (
+            {
                 "name": "Тестовый бонус три",
             },
             HTTPStatus.CREATED,
@@ -84,7 +103,8 @@ import pytest
         "failed create bonus_level: name has numbers",
         "failed create bonus_level: name has English characters",
         "failed create bonus_level: name is empty string",
-        "failed create bonus_level: amount_required is None",
+        "failed create bonus_level: name has special characters",
+        "succeed create bonus_level: amount_required is None",
     ],
 )
 @pytest.mark.asyncio()
