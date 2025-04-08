@@ -104,7 +104,7 @@ class BonusLevelService(MainService):
         async with session() as db:
             bonus_levels = await db.execute(
                 select(BonusLevel)
-                .where(BonusLevel.amount_required < bonus_amount)
+                .where(BonusLevel.amount_required <= bonus_amount)
                 .order_by(desc(BonusLevel.amount_required))
                 .limit(1)
             )

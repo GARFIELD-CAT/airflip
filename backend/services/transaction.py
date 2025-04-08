@@ -74,15 +74,15 @@ class TransactionService(MainService):
                 f"{current_bonus_amount=}"
             )
             logger.info(
-                f"Transaction c параметрами: {transaction_=} успешно создан."
+                f"Transaction c параметрами: {transaction_=} успешно создана."
             )
 
             return transaction
         except IntegrityError:
             await db.rollback()
 
-            logger.error(f"Transaction c {hash=} уже создан.")
-            raise ValueError(f"Transaction с {hash=} уже создан.")
+            logger.error(f"Transaction c {hash=} уже создана.")
+            raise ValueError(f"Transaction с {hash=} уже создана.")
 
     async def get_transaction(
         self,

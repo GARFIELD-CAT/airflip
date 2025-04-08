@@ -1,11 +1,13 @@
 import json
 import logging
-from datetime import datetime
+import datetime
+from datetime import datetime as dt
 from http import HTTPStatus
 from typing import List
 
 from fastapi import APIRouter, HTTPException
 
+from api.v1.account import ACCOUNT_CACHE_PREFIX_KEY
 from schemes.transaction import (
     CreateTransaction,
     ResponseTransaction,
@@ -38,6 +40,13 @@ async def create_transaction(input: CreateTransaction):
             transaction_date=input.transaction_date,
             account_id=input.account,
         )
+
+        # Удаляем запись из кеша,
+        # так как при создании транзакции обновляется сущность Account.
+        await cache_storage.delete(
+            f"{ACCOUNT_CACHE_PREFIX_KEY}:{input.account}"
+        )
+        logger.debug(f"Account с {input.account=} удален из кэша.")
     except ValueError as e:
         raise HTTPException(status_code=HTTPStatus.BAD_REQUEST, detail=str(e))
 
@@ -56,8 +65,8 @@ async def get_transaction_by_id(id: int):
 
     if transaction:
         transaction_ = json.loads(transaction)
-        transaction_["transaction_date"] = datetime.fromtimestamp(
-            transaction_["transaction_date"]
+        transaction_["transaction_date"] = dt.fromtimestamp(
+            transaction_["transaction_date"], datetime.UTC
         )
         logger.debug(f"Transation {transaction_=} получен из кэша.")
         return transaction_
@@ -93,8 +102,8 @@ async def get_transaction_by_hash(hash: str):
 
     if transaction:
         transaction_ = json.loads(transaction)
-        transaction_["transaction_date"] = datetime.fromtimestamp(
-            transaction_["transaction_date"]
+        transaction_["transaction_date"] = dt.fromtimestamp(
+            transaction_["transaction_date"], datetime.UTC
         )
         logger.debug(f"Transaction {transaction_=} получен из кэша.")
         return transaction_
@@ -132,10 +141,10 @@ async def delete_transaction(id: int):
 
     hash = transaction.hash
     await cache_storage.delete(f"{TRANSACTION_CACHE_PREFIX_KEY}:{hash}")
-    logger.debug(f"Account с {hash=} удален из кэша.")
+    logger.debug(f"Transation с {hash=} удален из кэша.")
 
     await cache_storage.delete(f"{TRANSACTION_CACHE_PREFIX_KEY}:{id}")
-    logger.debug(f"Account с {id=} удален из кэша.")
+    logger.debug(f"Transation с {id=} удален из кэша.")
 
 
 @transaction_router.patch(

@@ -30,7 +30,9 @@ class CreateTransaction(BaseModel):
 
         return value
 
-    @field_validator(*["amount_from", "amount_to"], mode="after")
+    @field_validator(
+        *["amount_from", "amount_to", "chain_from", "chain_to"], mode="after"
+    )
     def validate_int_value(cls, value):
         if value < 0:
             raise ValueError("Поле должно быть не меньше 0")
@@ -39,10 +41,10 @@ class CreateTransaction(BaseModel):
 
     @model_validator(mode="after")
     def validate_amounts(self):
-        if not all((self.amount_from, self.amount_to)):
+        if self.amount_from is None or self.amount_to is None:
             return self
 
-        if self.amount_from - self.amount_to < 0:
+        if (self.amount_from - self.amount_to) < 0:
             raise ValueError(
                 "Сумма отправления не может быть меньше суммы получения"
             )
@@ -51,7 +53,7 @@ class CreateTransaction(BaseModel):
 
     @model_validator(mode="after")
     def validate_tokens(self):
-        if not all((self.token_from, self.token_to)):
+        if self.token_from is None or self.token_to is None:
             return self
 
         if self.token_from == self.token_to:

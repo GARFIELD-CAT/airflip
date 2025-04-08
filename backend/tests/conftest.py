@@ -26,8 +26,9 @@ async def setup_database():
 
 @pytest_asyncio.fixture(scope="function")
 async def cache_storage():
-    redis = CacheStorage("localhost", 6379)
-    yield redis
+    cache = CacheStorage("localhost", 6379)
+    yield cache
+    await cache.redis.flushall()
 
 
 @pytest_asyncio.fixture(scope="session")
