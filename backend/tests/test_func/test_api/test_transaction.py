@@ -181,7 +181,7 @@ import pytest
                         "ctx": {"error": {}},
                         "input": "ТестоваяТранзакиция",
                         "loc": ["body", "hash"],
-                        "msg": "Value error, Поле должно содержать только латинские "
+                        "msg": "Value error, Поле должно содержать только латинские "  # noqa: 501
                         "символы/цифры",
                         "type": "value_error",
                     }
@@ -212,7 +212,7 @@ import pytest
                         "ctx": {"error": {}},
                         "input": "",
                         "loc": ["body", "hash"],
-                        "msg": "Value error, Поле должно содержать только латинские "
+                        "msg": "Value error, Поле должно содержать только латинские "  # noqa: 501
                         "символы/цифры",
                         "type": "value_error",
                     }
@@ -243,7 +243,7 @@ import pytest
                         "ctx": {"error": {}},
                         "input": "test Transa_ction1",
                         "loc": ["body", "hash"],
-                        "msg": "Value error, Поле должно содержать только латинские "
+                        "msg": "Value error, Поле должно содержать только латинские "  # noqa: 501
                         "символы/цифры",
                         "type": "value_error",
                     }
@@ -274,7 +274,7 @@ import pytest
                         "ctx": {"error": {}},
                         "input": "token_From1",
                         "loc": ["body", "token_from"],
-                        "msg": "Value error, Поле должно содержать только латинские "
+                        "msg": "Value error, Поле должно содержать только латинские "  # noqa: 501
                         "символы/цифры",
                         "type": "value_error",
                     }
@@ -305,7 +305,7 @@ import pytest
                         "ctx": {"error": {}},
                         "input": "token_To1",
                         "loc": ["body", "token_to"],
-                        "msg": "Value error, Поле должно содержать только латинские "
+                        "msg": "Value error, Поле должно содержать только латинские "  # noqa: 501
                         "символы/цифры",
                         "type": "value_error",
                     }
@@ -347,7 +347,7 @@ import pytest
                             "transaction_date": "2025-04-08T04:10:53",
                         },
                         "loc": ["body"],
-                        "msg": "Value error, Сумма отправления не может быть меньше суммы "
+                        "msg": "Value error, Сумма отправления не может быть меньше суммы "  # noqa: 501
                         "получения",
                         "type": "value_error",
                     }
@@ -389,7 +389,7 @@ import pytest
                             "transaction_date": "2025-04-08T04:10:53",
                         },
                         "loc": ["body"],
-                        "msg": "Value error, Отправитель транзакции не может быть "
+                        "msg": "Value error, Отправитель транзакции не может быть "  # noqa: 501
                         "получателем транзакции",
                         "type": "value_error",
                     }
@@ -457,7 +457,7 @@ async def test_create_transaction(
 
 
 @pytest.mark.parametrize(
-    "query_data, transaction_data, account_data, expected_status, expected_result",
+    "query_data, transaction_data, account_data, expected_status, expected_result",  # noqa: 501
     [
         (
             {
@@ -571,7 +571,7 @@ async def test_create_transaction_with_exists_account(
 
 
 @pytest.mark.parametrize(
-    "query_data, transaction_data, account_data, expected_status, expected_result",
+    "query_data, transaction_data, account_data, expected_status, expected_result",  # noqa: 501
     [
         (
             1,
@@ -662,7 +662,7 @@ async def test_get_transaction_by_id(
 
 
 @pytest.mark.parametrize(
-    "query_data, transaction_data, account_data, expected_status, expected_result",
+    "query_data, transaction_data, account_data, expected_status, expected_result",  # noqa: 501
     [
         (
             "testTransaction1",
@@ -753,7 +753,7 @@ async def test_get_transaction_by_hash(
 
 
 @pytest.mark.parametrize(
-    "query_data, transaction_data, account_data, expected_status, expected_result",
+    "query_data, transaction_data, account_data, expected_status, expected_result",  # noqa: 501
     [
         (
             1,
@@ -835,7 +835,7 @@ async def test_delete_transaction(
 
 
 @pytest.mark.parametrize(
-    "query_id, query_data, transaction_data, account_data, expected_status, expected_result",
+    "query_id, query_data, transaction_data, account_data, expected_status, expected_result",  # noqa: 501
     [
         (
             1,
@@ -882,9 +882,7 @@ async def test_delete_transaction(
         (
             1,
             {
-                "account": 1,
                 "amount_from": 200,
-                "amount_to": 100,
             },
             {
                 "account": 1,
@@ -905,7 +903,7 @@ async def test_delete_transaction(
             {
                 "account": 1,
                 "amount_from": 200,
-                "amount_to": 100,
+                "amount_to": 2,
                 "chain_from": 1000,
                 "chain_to": 2000,
                 "hash": "testTransaction1",
@@ -915,35 +913,216 @@ async def test_delete_transaction(
                 "transaction_date": "2025-04-08T04:10:53",
             },
         ),
-        # (
-        #     2,
-        #     {
-        #         "account": 1,
-        #         "amount_from": 10,
-        #         "amount_to": 2,
-        #         "chain_from": 1000,
-        #         "chain_to": 2000,
-        #         "hash": "testtransaction1",
-        #         "id": 1,
-        #         "token_from": "tokenFrom1",
-        #         "token_to": "tokenTo1",
-        #         "transaction_date": "2025-04-08T04:10:53",
-        #     },
-        #     {
-        #         "wallet_key": "TESTwalletkey1111",
-        #         "bonus_amount": 100,
-        #     },
-        #     HTTPStatus.NOT_FOUND,
-        #     {"detail": "Transaction c id=2 не найден."},
-        # ),
+        (
+            1,
+            {
+                "amount_to": 200,
+            },
+            {
+                "account": 1,
+                "amount_from": 10,
+                "amount_to": 2,
+                "chain_from": 1000,
+                "chain_to": 2000,
+                "hash": "testTransaction1",
+                "token_from": "tokenFrom1",
+                "token_to": "tokenTo1",
+                "transaction_date": "2025-04-08T04:10:53",
+            },
+            {
+                "wallet_key": "TESTwalletkey1111",
+                "bonus_amount": 100,
+            },
+            HTTPStatus.BAD_REQUEST,
+            {
+                "detail": "Сумма отправления не может быть меньше суммы получения"  # noqa: 501
+            },
+        ),
+        (
+            1,
+            {
+                "token_from": "tokenTo1",
+            },
+            {
+                "account": 1,
+                "amount_from": 10,
+                "amount_to": 2,
+                "chain_from": 1000,
+                "chain_to": 2000,
+                "hash": "testTransaction3",
+                "token_from": "tokenFrom1",
+                "token_to": "tokenTo1",
+                "transaction_date": "2025-04-08T04:10:53",
+            },
+            {
+                "wallet_key": "TESTwalletkey1111",
+                "bonus_amount": 100,
+            },
+            HTTPStatus.BAD_REQUEST,
+            {
+                "detail": "Отправитель транзакции не может быть получателем транзакции"  # noqa: 501
+            },
+        ),
+        (
+            1,
+            {
+                "token_to": "tokenFrom1",
+            },
+            {
+                "account": 1,
+                "amount_from": 10,
+                "amount_to": 2,
+                "chain_from": 1000,
+                "chain_to": 2000,
+                "hash": "testTransaction4",
+                "token_from": "tokenFrom1",
+                "token_to": "tokenTo1",
+                "transaction_date": "2025-04-08T04:10:53",
+            },
+            {
+                "wallet_key": "TESTwalletkey1111",
+                "bonus_amount": 100,
+            },
+            HTTPStatus.BAD_REQUEST,
+            {
+                "detail": "Отправитель транзакции не может быть получателем транзакции"  # noqa: 501
+            },
+        ),
+        (
+            1,
+            {
+                "transaction_date": "2025-04-08",
+            },
+            {
+                "account": 1,
+                "amount_from": 10,
+                "amount_to": 2,
+                "chain_from": 1000,
+                "chain_to": 2000,
+                "hash": "testTransaction4",
+                "token_from": "tokenFrom1",
+                "token_to": "tokenTo1",
+                "transaction_date": "2025-04-09",
+            },
+            {
+                "wallet_key": "TESTwalletkey1111",
+                "bonus_amount": 100,
+            },
+            HTTPStatus.OK,
+            {
+                "account": 1,
+                "amount_from": 10,
+                "amount_to": 2,
+                "chain_from": 1000,
+                "chain_to": 2000,
+                "hash": "testTransaction4",
+                "id": 1,
+                "token_from": "tokenFrom1",
+                "token_to": "tokenTo1",
+                "transaction_date": "2025-04-08T00:00:00",
+            },
+        ),
+        (
+            1,
+            {
+                "hash": "НоваяТранзация",
+            },
+            {
+                "account": 1,
+                "amount_from": 10,
+                "amount_to": 2,
+                "chain_from": 1000,
+                "chain_to": 2000,
+                "hash": "testTransaction4",
+                "token_from": "tokenFrom1",
+                "token_to": "tokenTo1",
+                "transaction_date": "2025-04-09",
+            },
+            {
+                "wallet_key": "TESTwalletkey1111",
+                "bonus_amount": 100,
+            },
+            HTTPStatus.UNPROCESSABLE_ENTITY,
+            {
+                "detail": [
+                    {
+                        "ctx": {"error": {}},
+                        "input": "НоваяТранзация",
+                        "loc": ["body", "hash"],
+                        "msg": "Value error, Поле должно содержать только латинские "  # noqa: 501
+                        "символы/цифры",
+                        "type": "value_error",
+                    }
+                ]
+            },
+        ),
+        (
+            2,
+            {
+                "hash": "testTransaction5",
+            },
+            {
+                "account": 1,
+                "amount_from": 10,
+                "amount_to": 2,
+                "chain_from": 1000,
+                "chain_to": 2000,
+                "hash": "testTransaction4",
+                "token_from": "tokenFrom1",
+                "token_to": "tokenTo1",
+                "transaction_date": "2025-04-09",
+            },
+            {
+                "wallet_key": "TESTwalletkey1111",
+                "bonus_amount": 100,
+            },
+            HTTPStatus.NOT_FOUND,
+            {"detail": "Transaction c transaction_id=2 не найден."},
+        ),
+        (
+            1,
+            {
+                "amount_from": -10,
+            },
+            {
+                "account": 1,
+                "amount_from": 10,
+                "amount_to": 2,
+                "chain_from": 1000,
+                "chain_to": 2000,
+                "hash": "testTransaction4",
+                "token_from": "tokenFrom1",
+                "token_to": "tokenTo1",
+                "transaction_date": "2025-04-09",
+            },
+            {
+                "wallet_key": "TESTwalletkey1111",
+                "bonus_amount": 100,
+            },
+            HTTPStatus.UNPROCESSABLE_ENTITY,
+            {
+                "detail": [
+                    {
+                        "ctx": {"error": {}},
+                        "input": -10,
+                        "loc": ["body", "amount_from"],
+                        "msg": "Value error, Поле должно быть не меньше 0",
+                        "type": "value_error",
+                    }
+                ]
+            },
+        ),
     ],
     ids=[
         "succeed full update transaction",
-        "succeed update wallet_key for transaction",
-        # "succeed update bonus_amount for transaction",
-        # "failed update account: transaction not found",
-        # "failed update account: bonus_amount less 0",
-        # "failed update account: wallet_key has Cyrillic characters",
+        "succeed update amount_from for transaction",
+        "failed update transaction: amount_to more than amount_from",
+        "failed update transaction: token_from equal token_to",
+        "failed update transaction: token_to equal token_from",
+        "succeed update transaction: transaction_date has not full format",
+        "failed update transaction: hash has Cyrillic characters",
+        "failed update transaction: transaction not found",
+        "failed update account: amount_from less 0",
     ],
 )
 @pytest.mark.asyncio()
@@ -972,11 +1151,154 @@ async def test_update_transaction(
         json=query_data,
     )
 
-    if expected_result:
-        result = response.json()
-        assert result == expected_result
+    result = response.json()
+    assert result == expected_result
 
     assert response.status_code == expected_status
+
+
+@pytest.mark.parametrize(
+    "query_data, transaction_data, update_transaction_data, account_data, bonus_level_data, expected_status, expected_result",  # noqa: 501
+    [
+        (
+            1,
+            {
+                "account": 1,
+                "amount_from": 2000,
+                "amount_to": 100,
+                "chain_from": 1000,
+                "chain_to": 2000,
+                "hash": "testTransaction1",
+                "id": 1,
+                "token_from": "tokenFrom1",
+                "token_to": "tokenTo1",
+                "transaction_date": "2025-04-08T04:10:53",
+            },
+            {"amount_to": 2000},
+            {
+                "wallet_key": "TESTwalletkey1111",
+                "bonus_amount": 100,
+            },
+            {
+                "name": "Тестовый бонус три",
+                "amount_required": 300,
+            },
+            HTTPStatus.OK,
+            {
+                "bonus_amount": 160.0,
+                "bonus_level": None,
+                "id": 1,
+                "wallet_key": "TESTwalletkey1111",
+            },
+        ),
+        (
+            1,
+            {
+                "account": 1,
+                "amount_from": 20000,
+                "amount_to": 100,
+                "chain_from": 1000,
+                "chain_to": 2000,
+                "hash": "testTransaction1",
+                "id": 1,
+                "token_from": "tokenFrom1",
+                "token_to": "tokenTo1",
+                "transaction_date": "2025-04-08T04:10:53",
+            },
+            {"amount_to": 10000},
+            {
+                "wallet_key": "TESTwalletkey1111",
+                "bonus_amount": 100,
+            },
+            {
+                "name": "Тестовый бонус три",
+                "amount_required": 300,
+            },
+            HTTPStatus.OK,
+            {
+                "bonus_amount": 400.0,
+                "bonus_level": 1,
+                "id": 1,
+                "wallet_key": "TESTwalletkey1111",
+            },
+        ),
+        (
+            1,
+            {
+                "account": 1,
+                "amount_from": 20000,
+                "amount_to": 100,
+                "chain_from": 1000,
+                "chain_to": 2000,
+                "hash": "testTransaction1",
+                "id": 1,
+                "token_from": "tokenFrom1",
+                "token_to": "tokenTo1",
+                "transaction_date": "2025-04-08T04:10:53",
+            },
+            {"amount_to": 10000},
+            {
+                "wallet_key": "TESTwalletkey1111",
+                "bonus_amount": 100,
+            },
+            {
+                "name": "Тестовый бонус четыре",
+                "amount_required": 400,
+            },
+            HTTPStatus.OK,
+            {
+                "bonus_amount": 400.0,
+                "bonus_level": 1,
+                "id": 1,
+                "wallet_key": "TESTwalletkey1111",
+            },
+        ),
+    ],
+    ids=[
+        "succeed update bonus_amount for account",
+        "succeed update bonus_level for account: bonus_amount exceeds than amount_required",  # noqa: 501
+        "succeed update bonus_level for account: bonus_amount is equal amount_required",  # noqa: 501
+    ],
+)
+@pytest.mark.asyncio()
+async def test_update_transaction_with_update_account_bonus_amount(
+    app_client,
+    setup_database,
+    query_data,
+    transaction_data,
+    update_transaction_data,
+    account_data,
+    bonus_level_data,
+    expected_status,
+    expected_result,
+):
+    app_client.post(
+        "/api/v1/bonus_levels/create/",
+        json=bonus_level_data,
+    )
+
+    app_client.post(
+        "/api/v1/accounts/create/",
+        json=account_data,
+    )
+
+    app_client.post(
+        "/api/v1/transactions/create/",
+        json=transaction_data,
+    )
+
+    app_client.patch(
+        f"/api/v1/transactions/update/{query_data}",
+        json=update_transaction_data,
+    )
+
+    response = app_client.get(
+        f"/api/v1/accounts/get_by_id/{query_data}",
+    )
+    result = response.json()
+
+    assert response.status_code == expected_status
+    assert result == expected_result
 
 
 @pytest.mark.parametrize(
@@ -1087,7 +1409,7 @@ async def test_get_transactions(
 
 
 @pytest.mark.parametrize(
-    "query_data, transaction_data, account_data, bonus_levels_data, expected_status, expected_result",
+    "query_data, transaction_data, account_data, bonus_levels_data, expected_status, expected_result",  # noqa: 501
     [
         (
             1,
@@ -1199,8 +1521,8 @@ async def test_get_transactions(
     ],
     ids=[
         "succeed update bonus_amount for account",
-        "succeed update bonus_level for account: bonus_amount exceeds than amount_required",
-        "succeed update bonus_level for account: bonus_amount is equal amount_required",
+        "succeed update bonus_level for account: bonus_amount exceeds than amount_required",  # noqa: 501
+        "succeed update bonus_level for account: bonus_amount is equal amount_required",  # noqa: 501
     ],
 )
 @pytest.mark.asyncio()

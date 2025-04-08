@@ -1,6 +1,6 @@
+import datetime
 import json
 import logging
-import datetime
 from datetime import datetime as dt
 from http import HTTPStatus
 from typing import List
@@ -161,7 +161,15 @@ async def update_transaction(id: int, input: UpdateTransaction):
         await cache_storage.delete(f"{TRANSACTION_CACHE_PREFIX_KEY}:{id}")
         logger.debug(f"Transation с {id=} удален из кэша.")
     except ValueError as e:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail=str(e))
+        detail = str(e)
+        if "не найден" in detail:
+            raise HTTPException(
+                status_code=HTTPStatus.NOT_FOUND, detail=str(e)
+            )
+        else:
+            raise HTTPException(
+                status_code=HTTPStatus.BAD_REQUEST, detail=str(e)
+            )
 
     return transaction
 

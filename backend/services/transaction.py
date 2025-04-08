@@ -149,6 +149,45 @@ class TransactionService(MainService):
                 if account is None:
                     raise ValueError(f"Account c {account_id=} не найден.")
 
+            # Нужно при частичном обновлении, чтобы проверить,
+            # что поля не нарушают валидацию.
+            if amount_to := kwargs["amount_to"]:
+                if transaction.amount_from < amount_to:
+                    raise ValueError(
+                        "Сумма отправления не может быть меньше суммы получения"  # noqa: 501
+                    )
+
+                transaction_account = transaction.accounts
+                clear_bonus_amount = (
+                    transaction_account.bonus_amount
+                    - self._calculate_bonus_amount(transaction.amount_to)
+                )
+
+                current_bonus_amount = (
+                    clear_bonus_amount
+                    + self._calculate_bonus_amount(amount_to)
+                )
+                transaction_account.bonus_amount = current_bonus_amount
+
+                bonus_level = await bonus_level_service.get_bonus_levels_for_bonus_amount(  # noqa: 501
+                    current_bonus_amount
+                )
+
+                if bonus_level:
+                    transaction_account.bonus_level = bonus_level.id
+
+            if token_to := kwargs["token_to"]:
+                if transaction.token_from == token_to:
+                    raise ValueError(
+                        "Отправитель транзакции не может быть получателем транзакции"  # noqa: 501
+                    )
+
+            if token_from := kwargs["token_from"]:
+                if transaction.token_to == token_from:
+                    raise ValueError(
+                        "Отправитель транзакции не может быть получателем транзакции"  # noqa: 501
+                    )
+
             for key, value in kwargs.items():
                 if value:
                     setattr(transaction, key, value)
