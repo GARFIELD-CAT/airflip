@@ -15,18 +15,18 @@ interface SocialsProperties extends ComponentProps<'div'> {
 const SOCIALS = [
   {
     name: 'GitHub',
-    link: 'https://github.com/maat-protocol',
+    link: 'https://github.com/GARFIELD-CAT/airflip',
     icon: GitHub,
   },
   {
     name: 'Discord',
     icon: Discord,
-    link: 'https://discord.gg/5srBUPbW',
+    link: '',
   },
   {
     name: 'Twitter',
     icon: Twitter,
-    link: 'https://x.com/maatprotocol',
+    link: '',
   },
 ]
 

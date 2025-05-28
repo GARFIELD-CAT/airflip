@@ -1,4 +1,4 @@
-import Logo from '@assets/icons/menu/logo.svg'
+import Logo from '@assets/icons/menu/logo.png'
 import useDeviceWidth from '@hooks/common/useDeviceWidth'
 import { cn } from '@utils/cn'
 import { AnimatePresence, motion } from 'framer-motion'
@@ -21,7 +21,7 @@ export const MenuTrigger = ({
       })}
       onClick={() => setIsOpen(!isOpen)}
     >
-      <Logo className="w-16 max-md:h-[1.9375rem] max-md:w-12" />
+      <img src={Logo} alt="Logo" className="h-[2.4rem] max-md:h-[1.9375rem] max-md:w-12" />
       <AnimatePresence mode="wait">
         {!isOpen && (
           <motion.div
