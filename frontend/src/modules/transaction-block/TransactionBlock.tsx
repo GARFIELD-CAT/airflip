@@ -2,7 +2,6 @@ import { useGetTokenSwapRoute } from '@api/lifi/hooks/useGetTokenSwapRoute'
 import { cn } from '@utils/cn'
 import { formatValueWithPrecision } from '@utils/formatValue'
 import BigNumber from 'bignumber.js'
-import { type ComponentProps } from 'react'
 import React from 'react'
 import { formatUnits } from 'viem'
 import { useAccount } from 'wagmi'
@@ -15,10 +14,7 @@ import { useSetDepositDetails } from './deposit/hooks/useSetDepositDetails'
 import ZapFee from './deposit/zap-fee/ZapFee'
 import { useTxStore } from './store/useTxStore'
 
-interface DepositBlockProperties extends ComponentProps<'div'> {}
-
-export const TransactionBlock = (props: DepositBlockProperties) => {
-  const { className, ...rest } = props
+export const TransactionBlock = () => {
   const { isConnected } = useAccount()
   const { isPending: isRouteLoading, route } = useGetTokenSwapRoute()
   const {

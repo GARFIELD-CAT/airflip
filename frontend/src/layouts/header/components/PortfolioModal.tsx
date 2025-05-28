@@ -1,11 +1,10 @@
-
 import ClosePortfolioIcon from '@assets/icons/portfolio-close.svg'
 import { useClickOutside } from '@hooks/useClickOutside'
 import { ThemeToggler } from '@modules/theme/ThemeToggler'
 import { useAppKit } from '@reown/appkit/react'
 import { cn } from '@utils/cn'
 import { AnimatePresence, motion } from 'framer-motion'
-import { useEffect, useMemo } from 'react'
+import { useEffect } from 'react'
 import { createPortal } from 'react-dom'
 
 import PortfolioButton from './PortfolioButton'

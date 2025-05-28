@@ -227,10 +227,13 @@ export const useTxStore = create<SelectedAssetState>()(
         set({
           inputValue: '',
           inputValueInUSD: '',
+          toTokenValue: '',
           depositTotalInUSD: '',
           depositTotalAmount: '',
           depositAsset: null,
+          toAsset: null,
           depositFromNetwork: null,
+          toNetwork: null,
           txType: TX_TYPE.DEPOSIT,
           collapseTxInfo: false,
           currentModal: null,
@@ -250,6 +253,7 @@ export const useTxStore = create<SelectedAssetState>()(
           approvalStatus: 'idle',
           intermediateError: null,
           transactionError: null,
+          inputError: null,
         }),
     }),
     {

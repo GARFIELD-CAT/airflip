@@ -13,8 +13,6 @@ export const TxReviewModal = () => {
     currentModal,
     setCurrentModal,
     setCurrentStep,
-    currentStep,
-    isTransactionCanBeCollapsed,
     resetStore,
     setIntermediateError,
     isTransactionFromStore,
@@ -24,13 +22,8 @@ export const TxReviewModal = () => {
 
   const { isDrawer } = useModalVariant()
 
-  const isTransactionSent =
-    (isTransactionFromStore || isTransactionCanBeCollapsed) && currentStep === 3
-
   const handleClose = () => {
-    if (isTransactionSent) {
-      resetStore()
-    }
+    resetStore()
     setIntermediateError(null)
     setCurrentStep(1)
     setCurrentModal(null)
