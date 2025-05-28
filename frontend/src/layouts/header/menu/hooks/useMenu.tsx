@@ -27,7 +27,7 @@ export const useMenu = () => {
     return {
       deposit: {
         href: ROUTES.SWAP,
-        label: 'Deposit',
+        label: 'Swap',
         icon: DepositIcon,
         linkType: 'internal',
         visibility: MenuVisibility.DesktopAndMobile,
