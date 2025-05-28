@@ -3,6 +3,7 @@ import logging
 
 import uvicorn
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
 from api.v1.account import account_router
 from api.v1.bonus_level import bonus_level_router
@@ -15,6 +16,14 @@ app = FastAPI(
     title=settings.project_name,
     docs_url="/api/openapi",
     openapi_url="/api/openapi.json",
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 app.include_router(bonus_level_router, prefix="/api/v1/bonus_levels")
