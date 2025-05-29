@@ -1,27 +1,21 @@
-import { USDC_TOKENS } from '@constants/usdc'
-import { USDT_TOKENS } from '@constants/usdt'
-import { USDC_VAULT_ADDRESS, USDT_VAULT_ADDRESS } from '@constants/vaults'
 import { useTxStore } from '@modules/transaction-block/store/useTxStore'
 import { formatTokenBalance } from '@utils/formatValue'
 import { useEffect } from 'react'
-import { type Address, formatUnits } from 'viem'
+import { formatUnits } from 'viem'
 
-export const useSetDepositDetails = () => {
+export const useSetSwapDetails = () => {
   const {
     swapRoute,
     depositFromNetwork,
     depositToNetwork,
-    vault,
     inputValue,
     depositAsset,
     vaultDepositTokenAddress,
     isTxZAP,
-    setVaultAddress,
     setDepositTotalInUSD,
     setDepositTotalAmount,
     setTxDifficulty,
     setIsTxZAP,
-    setVaultDepositTokenAddress, // Add this fucking line
   } = useTxStore()
 
   useEffect(() => {
@@ -46,29 +40,6 @@ export const useSetDepositDetails = () => {
     )
   }, [swapRoute, setDepositTotalInUSD, inputValue, setDepositTotalAmount, isTxZAP])
 
-  useEffect(() => {
-    if (!vault) return
-
-    switch (vault) {
-      case 'USDC': {
-        setVaultDepositTokenAddress(
-          USDC_TOKENS.find((token) => token.chainId === depositToNetwork)
-            ?.address as unknown as Address,
-        )
-        setVaultAddress(USDC_VAULT_ADDRESS)
-        return
-      }
-      case 'USDT': {
-        setVaultDepositTokenAddress(
-          USDT_TOKENS.find((token) => token.chainId === depositToNetwork)
-            ?.address as unknown as Address,
-        )
-        setVaultAddress(USDT_VAULT_ADDRESS)
-        break
-      }
-      default:
-    }
-  }, [depositToNetwork, setVaultAddress, setVaultDepositTokenAddress, vault])
 
   useEffect(() => {
     if (

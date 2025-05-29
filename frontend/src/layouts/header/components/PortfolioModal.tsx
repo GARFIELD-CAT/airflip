@@ -9,6 +9,8 @@ import { createPortal } from 'react-dom'
 
 import PortfolioButton from './PortfolioButton'
 import { UserTokens } from '@modules/portfolio/maat-activity/UserTokens'
+import { PointsBalance } from '@modules/points-balance/PointsBalance'
+import { useTotalBalance } from '@hooks/tokens/useTotalBalance'
 
 interface PortfolioModalProperties extends React.HTMLAttributes<HTMLDivElement> {
   isOpen: boolean
@@ -24,9 +26,7 @@ export const PortfolioModal = ({
 }: PortfolioModalProperties) => {
 
   const { open: openConnectModal } = useAppKit()
-
-
-
+  const { formattedBalance, isLoading: isTotalBalanceLoading } = useTotalBalance()
 
   const handleClickOutside = () => {
     if (isOpen) {
@@ -74,13 +74,16 @@ export const PortfolioModal = ({
             </div>
             <div className="relative size-auto max-h-screen w-[30.125rem] overflow-y-auto rounded-3xl border border-stroke-100 bg-cards-widget pt-4 shadow-lg">
               <div className="flex h-auto w-full items-center justify-between  px-6 py-4">
-                <PortfolioButton
-                  context="modal"
-                  onClick={onClose}
-                  isOpen={isOpen}
-                  openConnectModal={() => openConnectModal()}
-                  isMobile={isMobile}
-                />
+                <div className="flex items-center gap-2">
+                  <PortfolioButton
+                    context="modal"
+                    onClick={onClose}
+                    isOpen={isOpen}
+                    openConnectModal={() => openConnectModal()}
+                    isMobile={isMobile}
+                    />
+                  <PointsBalance />
+                </div>
                 <div className="flex  items-center justify-center gap-2 ">
                   <ThemeToggler />
                   {isMobile && (
@@ -94,10 +97,16 @@ export const PortfolioModal = ({
                   )}
                 </div>
               </div>
+              <div className="px-6">
+                <div className="text-[#F4F2F5] text-[2rem] font-medium">
+                  {isTotalBalanceLoading ? 'Loading...' : `${formattedBalance}`}
+                </div>
+              </div>
+              
               <div className="hide-scrollbar pointer-events-auto h-auto max-h-[80vh] overflow-y-auto bg-cards-widget">
                 <div
                   className={cn(
-                    'mt-8 [&_.all-assets]:max-h-[calc(90vh-200px)] [&_.all-assets]:overflow-y-auto [&_.all-assets]:overflow-x-hidden [&_.user-activity]:overflow-y-auto [&_.user-activity]:overflow-x-hidden flex flex-col gap-4',
+                    'mt-4 [&_.all-assets]:max-h-[calc(90vh-200px)] [&_.all-assets]:overflow-y-auto [&_.all-assets]:overflow-x-hidden [&_.user-activity]:overflow-y-auto [&_.user-activity]:overflow-x-hidden flex flex-col gap-4',
                   )}
                 >
                   <UserTokens />

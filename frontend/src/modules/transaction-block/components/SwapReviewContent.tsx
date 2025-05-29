@@ -4,6 +4,7 @@ import { formatAmountValue } from '@utils/formatValue'
 
 import { useTxStore } from '../store/useTxStore'
 import { SwapERC20Tokens, SwapNativeTokens } from '../swap-wizards'
+import { calculateSwapBonus } from '@utils/bonusCalculator'
 
 interface SwapReviewContentProps {
   allStepsCompleted?: boolean
@@ -18,6 +19,7 @@ export const SwapReviewContent = ({ allStepsCompleted }: SwapReviewContentProps 
     inputValue,
     toTokenValue,
     inputValueInUSD,
+    collapseTxInfo,
     swapRoute,
   } = useTxStore()
 
@@ -64,9 +66,11 @@ export const SwapReviewContent = ({ allStepsCompleted }: SwapReviewContentProps 
         )}
       </div>
 
-      {/* Transaction Details */}
-      <div className="space-y-4">
-        {/* From Token */}
+      {!collapseTxInfo && (
+        <>
+          {/* Transaction Details */}
+          <div className="space-y-4">
+            {/* From Token */}
         <div className="bg-input-active rounded-xl p-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
@@ -172,7 +176,15 @@ export const SwapReviewContent = ({ allStepsCompleted }: SwapReviewContentProps 
               {toAsset.contract_ticker_symbol}
             </span>
           </div>
+          <div className="flex justify-between items-center">
+            <span className="text-sm text-text-2100">Points reward</span>
+            <span className="text-sm font-medium text-text-1100">
+              {calculateSwapBonus(Number(swapRoute?.estimate?.toAmountUSD || '0'))} XP
+            </span>
+          </div>
         </div>
+      )}
+      </>
       )}
 
       {/* Action Buttons */}

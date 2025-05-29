@@ -6,10 +6,9 @@ import { CHAINS } from '@constants/chains'
 import { useTokenAsset } from '@hooks/common/useTokenAsset'
 import Grey3DBox from '@modules/transaction-block/components/Grey3DBox'
 import { useTxStore } from '@modules/transaction-block/store/useTxStore'
-import { filterChainsByVault } from '@modules/transaction-block/utils/filterChainsByVault'
 import type * as PopoverPrimitive from '@radix-ui/react-popover'
 import { cn } from '@utils/cn'
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 
 const NetworkItem: React.FC<{ chain: any; onClick: () => void }> = ({
   chain,
@@ -44,7 +43,6 @@ export const NetworkSelector: React.FC<NetworkPopoverProperties> = ({ disabled }
   const { vault, depositToNetwork, setDepositToNetwork } = useTxStore()
   const NetworkData = useTokenAsset(depositToNetwork)
 
-  const filteredChains = useMemo(() => filterChainsByVault([...CHAINS], vault), [vault])
 
   return (
     <Popover
@@ -80,7 +78,7 @@ export const NetworkSelector: React.FC<NetworkPopoverProperties> = ({ disabled }
         sideOffset={8}
         className="pointer-events-auto flex w-[23.25rem] flex-col gap-5 rounded-3xl bg-[#F9F9FF] p-6 [box-shadow:0px_3px_1px_0px_rgba(135,_99,_243,_0.12)] dark:bg-cards-widget"
       >
-        {filteredChains.map((chain) => (
+        {CHAINS.map((chain) => (
           <NetworkItem
             key={chain}
             chain={chain}

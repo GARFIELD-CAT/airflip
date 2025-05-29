@@ -41,6 +41,8 @@ export const Socials = (props: SocialsProperties) => {
       )}
     >
       {SOCIALS.map((social) => (
+        social.link ?
+        (
         <a target="_blank" href={social.link} key={social.link} rel="noreferrer">
           <social.icon
             className={cn(
@@ -49,6 +51,18 @@ export const Socials = (props: SocialsProperties) => {
             )}
           />
         </a>
+        )
+        :
+        (
+          <div key={social.name}>
+            <social.icon
+              className={cn(
+                'size-6 max-md:size-8 overflow-visible [&_path]:fill-gray-50 opacity-30',
+                classNames?.icon,
+              )}
+            />
+          </div>
+        )
       ))}
     </div>
   )

@@ -1,6 +1,5 @@
 import type { ITokenData } from '@api/tokens-balance/use-tokens-balance'
-import { CHAIN_IDS_BY_NAME, type ChainType } from '@constants/chains'
-import { SupportedChainIds } from '@constants/vaults'
+import { type ChainType } from '@constants/chains'
 
 import { useTxStore } from '../../store/useTxStore'
 
@@ -18,11 +17,7 @@ export const useAssetSelection = () => {
     setAsset(selectedAsset)
     setDepositFromNetwork(selectedAsset.chain_id as ChainType)
 
-    if (SupportedChainIds.includes(selectedAsset.chain_id)) {
-      setDepositToNetwork(selectedAsset.chain_id as ChainType)
-    } else {
-      setDepositToNetwork(CHAIN_IDS_BY_NAME.Arbitrum)
-    }
+    setDepositToNetwork(selectedAsset.chain_id as ChainType)
 
     return selectedAsset
   }

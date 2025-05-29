@@ -10,9 +10,10 @@ import { SwapActionButton } from './deposit/components/DepositActionButton'
 import { SwappableInputs } from './deposit/components/SwappableInputs'
 import { useInputHandling } from './deposit/hooks/useInputHandling'
 import { useInputValidation } from './deposit/hooks/useInputValidation'
-import { useSetDepositDetails } from './deposit/hooks/useSetDepositDetails'
+import { useSetSwapDetails } from './deposit/hooks/useSetSwapDetails'
 import ZapFee from './deposit/zap-fee/ZapFee'
 import { useTxStore } from './store/useTxStore'
+import { calculateSwapBonus } from '@utils/bonusCalculator'
 
 export const TransactionBlock = () => {
   const { isConnected } = useAccount()
@@ -33,7 +34,7 @@ export const TransactionBlock = () => {
     setInputError,
   } = useTxStore()
 
-  useSetDepositDetails()
+  useSetSwapDetails()
 
   // Calculate toUsdValue based on toTokenValue and toAsset rate
   const toUsdValue = React.useMemo(() => {
@@ -131,9 +132,12 @@ export const TransactionBlock = () => {
           onModalOpen={() => setCurrentModal('review')}
         />
       </div>
+      <p className="text-text-2100 text-center text-[1rem] not-italic font-medium leading-[100%]">
+        Reward program {calculateSwapBonus(Number(swapRoute?.estimate?.toAmountUSD || '0'))} XP
+      </p>
       {!validationError && <ZapFee />}
       <p className="text-[#99979A] text-center text-[1rem] not-italic font-medium leading-[100%]">
-        Powered by <a href="https://lifi.io" target="_blank" rel="noopener noreferrer" className="text-[#F4F2F5]">Li.fi</a>
+        Powered by <a href="https://lifi.io" target="_blank" rel="noopener noreferrer" className="dark:text-[#F4F2F5] text-main-100">Li.fi</a>
       </p>
     </>
   )

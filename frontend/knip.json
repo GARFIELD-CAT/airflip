@@ -5,7 +5,7 @@
     "src/vite-env.d.ts"
   ],
   "project": [
-    "src/**/*.{ts,tsx,js,jsx}",
+    "src/**/*.{ts,tsx,js,jsx,svg}",
     "!src/**/*.test.{ts,tsx,js,jsx}",
     "!src/**/*.spec.{ts,tsx,js,jsx}"
   ],
