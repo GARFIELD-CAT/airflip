@@ -1,8 +1,8 @@
 import '@assets/styles/global.scss'
 import './i18n'
 
-import React from 'react'
 import ReactDOM from 'react-dom/client'
+import React from 'react'
 
 import App from './App'
 
