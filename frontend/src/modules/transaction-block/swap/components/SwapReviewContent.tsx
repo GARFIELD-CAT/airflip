@@ -2,8 +2,8 @@ import { TokenIconComponent } from '@components/token-icon'
 import { CHAIN_NAMES_BY_ID } from '@constants/chains'
 import { formatAmountValue } from '@utils/formatValue'
 
-import { useTxStore } from '../store/useTxStore'
-import { SwapERC20Tokens, SwapNativeTokens } from '../swap-wizards'
+import { useTxStore } from '../../store/useTxStore'
+import { SwapERC20Tokens, SwapNativeTokens } from '../wizards'
 import { calculateSwapBonus } from '@utils/bonusCalculator'
 
 interface SwapReviewContentProps {

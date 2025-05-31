@@ -8,9 +8,9 @@ import { useEffect } from 'react'
 import { createPortal } from 'react-dom'
 
 import PortfolioButton from './PortfolioButton'
-import { UserTokens } from '@modules/portfolio/maat-activity/UserTokens'
 import { PointsBalance } from '@modules/points-balance/PointsBalance'
 import { useTotalBalance } from '@hooks/tokens/useTotalBalance'
+import { UserTokens } from './UserTokens'
 
 interface PortfolioModalProperties extends React.HTMLAttributes<HTMLDivElement> {
   isOpen: boolean

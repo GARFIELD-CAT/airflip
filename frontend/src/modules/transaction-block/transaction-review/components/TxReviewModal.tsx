@@ -5,8 +5,8 @@ import { Drawer, DrawerContent } from '@components/ui/drawer'
 import { useModalVariant } from '@hooks/common/useModalVariant'
 import { cloneElement } from 'react'
 
-import { SwapReviewContent } from './components/SwapReviewContent'
-import { useTxStore } from './store/useTxStore'
+import { SwapReviewContent } from '../../swap/components/SwapReviewContent'
+import { useTxStore } from '../../store/useTxStore'
 
 export const TxReviewModal = () => {
   const {

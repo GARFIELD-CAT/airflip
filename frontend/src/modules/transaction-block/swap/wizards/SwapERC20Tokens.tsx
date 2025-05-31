@@ -1,16 +1,16 @@
 import { Button } from '@components/ui/button'
 import { useTokenAsset } from '@hooks/common/useTokenAsset'
-import { SuccessButton } from '@modules/transaction-block/components/SuccessButton'
-import { TransactionStatus } from '@modules/transaction-block/components/TransactionStatus'
-import { useTransactionStatus } from '@modules/transaction-block/hooks/useTransactionStatus'
+import { SuccessButton } from '@modules/transaction-block/shared/components/SuccessButton'
+import { useTransactionStatus } from '@modules/transaction-block/transaction-review/hooks/useTransactionStatus'
 import { useTxStore } from '@modules/transaction-block/store/useTxStore'
-import { getButtonContent } from '@modules/transaction-block/utils/getButtonText'
+import { getButtonContent } from '@modules/transaction-block/shared/utils/getButtonText'
 import { useEffect } from 'react'
 import { type Address, parseUnits } from 'viem'
 
-import { useApproveERC20 } from '../deposit/hooks/useApproveERC20'
-import { useSwap } from '../deposit/hooks/useSwap'
-import { useSwitchToTokenChain } from '../deposit/hooks/useSwitchToTokenChain'
+import { useApproveERC20 } from '../hooks/useApproveERC20'
+import { useSwap } from '../hooks/useSwap'
+import { useSwitchToTokenChain } from '../hooks/useSwitchToTokenChain'
+import { TransactionStatus } from '@modules/transaction-block/transaction-review/components/TransactionStatus'
 
 interface SwapERC20TokensProps {
   allStepsCompleted?: boolean

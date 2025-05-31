@@ -5,7 +5,7 @@ import React from 'react'
 
 import Details from './Details'
 import ShortInfo from './ShortInfo'
-import { getSummaryAndFees } from './summaryAndFees'
+import { getSummaryAndFees } from '../../utils/summaryAndFees'
 import { useGetTokenSwapRoute } from '@api/lifi/hooks/useGetTokenSwapRoute'
 
 interface ZapFeeProperties extends HTMLAttributes<HTMLDivElement> {}

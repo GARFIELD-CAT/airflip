@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useChainId, useSwitchChain } from 'wagmi'
 
-import type { IDepositWizardHook, STEP_STATUS } from '../interfaces'
+import type { IDepositWizardHook, STEP_STATUS } from '../types/interfaces'
 
 interface IProperties extends IDepositWizardHook {
   chainId?: string | number

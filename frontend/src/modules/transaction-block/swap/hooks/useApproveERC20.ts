@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { type Address, erc20Abi } from 'viem'
 import { useAccount, useConfig, useReadContract, useWriteContract } from 'wagmi'
 
-import type { IDepositWizardHook, STEP_STATUS } from '../interfaces'
+import type { IDepositWizardHook, STEP_STATUS } from '../types/interfaces'
 
 interface IProperties extends IDepositWizardHook {
   approveValue?: string

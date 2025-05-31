@@ -2,7 +2,7 @@ import { Button } from '@components/ui/button'
 import { getRandomOkAnalog } from '@utils/phrases'
 import type { ComponentProps } from 'react'
 
-import { useTxStore } from '../store/useTxStore'
+import { useTxStore } from '../../store/useTxStore'
 
 interface SuccessButtonProperties extends ComponentProps<'button'> {
   onSuccess?: () => void

@@ -1,6 +1,6 @@
 import { SCAN_LINK_BY_CHAIN_ID } from '@constants/chains'
 
-import { useTxStore } from '../store/useTxStore'
+import { useTxStore } from '../../store/useTxStore'
 
 interface TransactionStatusProps {
   type: 'swap' | 'deposit' | 'approve' | 'switch'

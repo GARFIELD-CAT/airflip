@@ -4,7 +4,7 @@ import { ShadowBox } from '@components/box/ShadowBox'
 import { cn } from '@utils/cn'
 import { formatTokenBalance } from '@utils/formatValue'
 
-import DollarInput from '../../components/DollarInput'
+import DollarInput from '../../shared/components/DollarInput'
 import { useInputsMode } from '../hooks/useInputsMode'
 import { SelectDepositAsset } from '../SelectDepositAssetModal'
 import { SelectToAsset } from '../SelectToAssetModal'

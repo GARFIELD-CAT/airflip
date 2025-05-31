@@ -2,7 +2,7 @@ import NetworksGroup from '@assets/images/networks-group.png'
 import { ShadowBox } from '@components/box/ShadowBox'
 import { TokenIconComponent } from '@components/token-icon'
 
-import type { SelectChainTriggerProperties } from '../types'
+import type { SelectChainTriggerProperties } from '../types/types'
 
 export const SelectChainTrigger = ({ chain }: SelectChainTriggerProperties) => {
   return (

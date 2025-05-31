@@ -1,8 +1,7 @@
-// src/modules/portfolio/maat-activity/UserTokens.tsx
 import { cn } from '@utils/cn'
 import { type ComponentProps } from 'react'
 
-import { AllAssets } from '../all-assets/AllAssets'
+import { AllAssets } from '../../../modules/portfolio/all-assets/AllAssets'
 
 interface UserTokensProperties extends ComponentProps<'div'> {}
 

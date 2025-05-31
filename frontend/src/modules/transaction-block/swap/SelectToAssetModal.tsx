@@ -8,7 +8,7 @@ import { UniversalSelectModal } from '@components/universal-select-modal/Univers
 import type { ChainType } from '@constants/chains'
 import useDeviceWidth from '@hooks/common/useDeviceWidth'
 import { useLifiTokens } from '@hooks/tokens/useLifiTokens'
-import { useToAssetSelection } from '@modules/transaction-block/deposit/hooks/useToAssetSelection'
+import { useToAssetSelection } from '@modules/transaction-block/swap/hooks/useToAssetSelection'
 import { cn } from '@utils/cn'
 import { useMemo, useState } from 'react'
 

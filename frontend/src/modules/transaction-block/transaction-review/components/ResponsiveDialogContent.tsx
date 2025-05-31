@@ -4,7 +4,7 @@ import { DialogContent } from '@components/ui/dialog'
 import useDeviceWidth from '@hooks/common/useDeviceWidth'
 import { cn } from '@utils/cn'
 
-import type { ResponsiveDialogContentProperties } from '../types'
+import type { ResponsiveDialogContentProperties } from '../../swap/types/types'
 
 export const ResponsiveDialogContent = ({
   className,

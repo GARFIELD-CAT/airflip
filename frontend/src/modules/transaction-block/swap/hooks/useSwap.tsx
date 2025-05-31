@@ -1,5 +1,5 @@
 import { ESTIMATED_TIME_OF_CONFIRMATION } from '@constants/chains'
-import type { STEP_STATUS } from '@modules/transaction-block/deposit/interfaces'
+import type { STEP_STATUS } from '@modules/transaction-block/swap/types/interfaces'
 import { useTransactionStore } from '@modules/transaction-block/store/usePendingTransactionsStore'
 import { useTxStore } from '@modules/transaction-block/store/useTxStore'
 import { convertBigIntToString } from '@utils/formatValue'

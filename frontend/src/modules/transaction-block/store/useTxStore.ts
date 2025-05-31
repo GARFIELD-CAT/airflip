@@ -8,7 +8,7 @@ import type { Address } from 'viem'
 import { create } from 'zustand'
 import { devtools } from 'zustand/middleware'
 
-import type { STEP_STATUS } from '../deposit/interfaces'
+import type { STEP_STATUS } from '../swap/types/interfaces'
 import type { IPendingTransactionData } from './usePendingTransactionsStore'
 
 export type Vault = 'USDT' | 'USDC'

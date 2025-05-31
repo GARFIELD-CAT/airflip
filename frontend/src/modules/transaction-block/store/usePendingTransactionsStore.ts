@@ -2,7 +2,7 @@
 import { create } from 'zustand'
 import { devtools, persist } from 'zustand/middleware'
 
-import type { STEP_STATUS } from '../deposit/interfaces'
+import type { STEP_STATUS } from '../swap/types/interfaces'
 import type { SelectedAssetState } from './useTxStore'
 
 type OmitSetters<T> = {

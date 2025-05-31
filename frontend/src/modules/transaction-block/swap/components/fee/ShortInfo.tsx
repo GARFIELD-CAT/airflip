@@ -3,7 +3,7 @@ import { Skeleton } from '@components/ui/skeleton'
 import type { HTMLAttributes } from 'react'
 import React from 'react'
 
-import type { SummaryAndFees } from './summaryAndFees'
+import type { SummaryAndFees } from '../../utils/summaryAndFees'
 
 type ShortInfoProperties = HTMLAttributes<HTMLDivElement> & {
   openHandler?: () => void

@@ -10,7 +10,7 @@ import type { HTMLAttributes } from 'react'
 import React from 'react'
 
 import { NetworkSelector } from './NetworkSelector'
-import type { SummaryAndFees } from './summaryAndFees'
+import type { SummaryAndFees } from '../../utils/summaryAndFees'
 
 const Line: React.FC<
   HTMLAttributes<HTMLDivElement> & {

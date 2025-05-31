@@ -2,7 +2,7 @@ import useDeviceWidth from '@hooks/common/useDeviceWidth'
 import { cn } from '@utils/cn'
 import { forwardRef, useEffect, useRef, useState } from 'react'
 
-import { useInputsMode } from '../deposit/hooks/useInputsMode'
+import { useInputsMode } from '../../swap/hooks/useInputsMode'
 
 interface DollarInputProperties {
   /** Current input value */
