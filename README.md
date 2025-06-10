@@ -77,8 +77,7 @@
 #### Альтернативный запуск через Docker
 
 - Перейдите в папку `frontend`
-- Соберите Docker образ `docker build -t airflip-frontend .`
-- Запустите контейнер `docker run -p 3000:80 airflip-frontend`
+- Запустите контейнер `docker-compose up --build -d`
 - Приложение будет доступно по адресу http://localhost:3000
 
 ## Работа с API
