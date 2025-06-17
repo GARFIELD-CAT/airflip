@@ -9,7 +9,7 @@ import { IonButton } from '@ionic/react'
  */
 export const TransactionStatusDebug = () => {
   const { transactions, clearTransactions } = useTransactionStore()
-  const [isCollapsed, setIsCollapsed] = useState(false)
+  const [isCollapsed, setIsCollapsed] = useState(true)
 
   if (process.env.NODE_ENV !== 'development') {
     return null

@@ -35,6 +35,7 @@ svg {
     body {
       width: 100vw;
       @apply font-montreal font-medium text-text-1100 bg-bg;
+      min-height: 100vh;
       &.scroll-locked {
         overflow: hidden !important;
         touch-action: none;
@@ -69,6 +70,10 @@ svg {
   background: var(--gray-50);
   border: 0.2rem solid transparent; // Add this line
   background-clip: padding-box;
+}
+
+.button-native {
+  min-height: 0;
 }
 
 .link-d3 {

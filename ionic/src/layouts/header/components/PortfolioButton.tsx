@@ -51,7 +51,7 @@ const PortfolioButton: React.FC<PortfolioButtonProperties> = ({
       <DropdownMenu.Trigger asChild>
         <IonButton
           type="button"
-          className="bg-white rounded-2xl dark:bg-cards-widget shadow-test"
+          className="bg-white rounded-2xl dark:bg-cards-widget shadow-test min-h-0"
           style={{
             '--background': 'transparent',
             '--background-hover': 'transparent',

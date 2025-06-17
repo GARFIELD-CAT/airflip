@@ -11,14 +11,20 @@ interface BaseLayoutProperties extends ComponentProps<'div'> {
 export const BaseLayout = ({ component: Component, pageTitle, ...props }: BaseLayoutProperties) => {
   return (
     <IonPage className="flex min-h-screen flex-col px-[6.25rem] max-lg:px-4">
-      <IonHeader>
-        <IonToolbar>
+      <IonHeader className="bg-transparent" style={{
+        '--background': 'transparent',
+      } as React.CSSProperties}>
+        <IonToolbar className="bg-transparent" style={{
+          '--background': 'transparent',
+          '--color': 'var(--main-100)',
+          '--border-width': '0',
+        } as React.CSSProperties}>
           <IonTitle>{pageTitle}</IonTitle>
         </IonToolbar>
+        <Header className="mt-4 lg:mt-[2.06rem] bg-transparent" />
       </IonHeader>
-      <Header className="mt-4 lg:mt-[2.06rem]" />
-      <IonContent className="ion-padding">
-        <div className="flex min-h-screen flex-col px-[6.25rem] max-lg:px-4">
+      <IonContent>
+        <div className="flex min-h-screen flex-col px-[6.25rem] max-lg:px-0">
           <main className="flex-1 lg:mt-0">
             <Component {...props} />
           </main>

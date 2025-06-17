@@ -16,7 +16,7 @@ export const MenuTrigger = ({
   return (
     <IonButton
       type="button"
-      className="m-0 p-0 -translate-y-[0.35rem]"
+      className="m-0 p-0 -translate-y-[0.35rem] max-lg:translate-y-[-0.6rem]"
       style={{
         '--background': 'transparent',
         '--background-hover': 'transparent',

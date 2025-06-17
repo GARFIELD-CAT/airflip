@@ -1,17 +1,16 @@
 import Metamask from '@assets/icons/metamask.svg'
-import { Button, type ButtonProperties } from '@components/ui/button'
 import { useAccountManager } from '@hooks/accounts'
+import { IonButton } from '@ionic/react'
 import { useAppKit } from '@reown/appkit/react'
 import { shortenAddress } from '@utils/transform'
 import clsx from 'clsx'
 import { useAccount, useDisconnect } from 'wagmi'
 
 interface IConnectWalletProperties {
-  btnProps?: ButtonProperties
   className?: string
 }
 
-export const ConnectWallet = ({ btnProps, className }: IConnectWalletProperties) => {
+export const ConnectWallet = ({ className }: IConnectWalletProperties) => {
   const { open: openConnectModal } = useAppKit()
   const { disconnect } = useDisconnect()
   const { address } = useAccount()
@@ -48,19 +47,26 @@ export const ConnectWallet = ({ btnProps, className }: IConnectWalletProperties)
   }
 
   return (
-    <Button
-      variant="container"
-      type="button"
-      {...btnProps}
-      className={clsx(
-        'flex items-center gap-3 rounded-xl px-6 py-3 text-[1.25rem] font-normal uppercase leading-[120%] tracking-[-0.0125rem]',
-        btnProps?.className,
-        className,
-      )}
+    <IonButton
+      fill="solid"
+      color="primary"
+      style={{
+        '--background': 'rgba(153,_152,_184,_0.10)',
+        '--background-hover': 'transparent',
+        '--background-activated': 'transparent',
+        '--color': 'var(--main-100)',
+        '--border-radius': '1.375rem',
+        '--border-width': '0',
+        '--box-shadow': 'none',
+        '--border-color': 'transparent',
+        '--inner-border-width': '0',
+        '--ripple-color': 'var(--white)',
+        '--transition': 'none',
+      } as React.CSSProperties}
       onClick={handleClick}
       disabled={isInitializing}
     >
       {getButtonContent()}
-    </Button>
+    </IonButton>
   )
 }

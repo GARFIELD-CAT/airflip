@@ -1,6 +1,7 @@
 import ArrowTopRight from '@assets/icons/arrow-top-right.svg'
 import DepositIcon from '@assets/icons/menu/deposit.svg'
 import DocsIcon from '@assets/icons/menu/docs.svg'
+import PortfolioIcon from '@assets/icons/menu/portfolio.svg'
 import { ROUTES } from '@routes/routes'
 import { cn } from '@utils/cn'
 import type { ComponentProps } from 'react'
@@ -32,6 +33,13 @@ export const useMenu = () => {
         linkType: 'internal',
         visibility: MenuVisibility.DesktopAndMobile,
         iconClassName: 'size-8 [&_path]:stroke-current',
+      },
+      portfolio: {
+        href: ROUTES.PORTFOLIO,
+        label: 'Portfolio',
+        icon: PortfolioIcon,
+        linkType: 'internal',
+        visibility: MenuVisibility.DesktopAndMobile,
       },
       docs: {
         href: 'https://docs.li.fi/',

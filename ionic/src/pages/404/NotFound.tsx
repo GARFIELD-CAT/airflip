@@ -107,7 +107,13 @@ export const NotFound = ({ className, ...rest }: NotFoundProperties) => {
 
           <IonButton
             onClick={() => window.history.back()}
-            className="hover:bg-main-8/10 group rounded-xl border border-stroke-100 bg-cards-widget px-8 py-4 text-[1.125rem] font-medium text-text-2100 transition-all duration-300 hover:shadow-lg"
+            className="group rounded-xl border border-stroke-100 bg-cards-widget text-[1.125rem] font-medium text-text-2100 transition-all duration-300"
+            style={{
+              '--background': 'transparent',
+              '--background-hover': 'transparent',
+              '--background-activated': 'transparent',
+              '--color': 'var(--main-100)',
+            } as React.CSSProperties}
           >
             <motion.span
               whileHover={{ scale: 1.05 }}

@@ -26,7 +26,7 @@ export const SelectToTokensListItem = ({
     } as React.CSSProperties}>
     <IonButton
       type="button"
-      className="w-full"
+      className="w-full text-text-100"
       onClick={() => onChange(token)}
       style={{
         '--background': 'transparent',
