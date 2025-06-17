@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useTransactionStore } from '@modules/transaction-block/store/usePendingTransactionsStore'
 import { cn } from '@utils/cn'
+import { IonButton } from '@ionic/react'
 
 /**
  * Debug component to show current pending transactions
@@ -34,33 +35,60 @@ export const TransactionStatusDebug = () => {
         </div>
         
         <div className="flex items-center gap-1">
-          <button
+          <IonButton
             onClick={toggleCollapse}
-            className="p-1.5 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
+            style={{
+              '--background': 'transparent',
+              '--background-hover': 'transparent',
+              '--box-shadow': 'none',
+              '--border-radius': '0.375rem',
+              '--padding-start': '0.375rem',
+              '--padding-end': '0.375rem',
+              '--padding-top': '0.375rem',
+              '--padding-bottom': '0.375rem',
+              '--width': 'auto',
+              '--height': 'auto',
+              'display': 'flex',
+              'alignItems': 'center',
+              'justifyContent': 'center',
+            } as React.CSSProperties}
             title={isCollapsed ? "Expand" : "Collapse"}
           >
             <svg 
-              className={`w-4 h-4 text-gray-600 dark:text-gray-400 transition-transform duration-200 ${
-                isCollapsed ? 'rotate-180' : ''
-              }`} 
+              style={{ width: '1rem', height: '1rem', color: 'var(--ion-color-gray-600)', transform: isCollapsed ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }}
               fill="none" 
               stroke="currentColor" 
               viewBox="0 0 24 24"
             >
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
             </svg>
-          </button>
+          </IonButton>
           
-          <button
+          <IonButton
             type="button"
             onClick={clearTransactions}
-            className="p-1.5 text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors"
+            style={{
+              '--background': 'transparent',
+              '--background-hover': 'transparent',
+              '--box-shadow': 'none',
+              '--border-radius': '0.375rem',
+              '--padding-start': '0.375rem',
+              '--padding-end': '0.375rem',
+              '--padding-top': '0.375rem',
+              '--padding-bottom': '0.375rem',
+              '--width': 'auto',
+              '--height': 'auto',
+              'display': 'flex',
+              'alignItems': 'center',
+              'justifyContent': 'center',
+              'color': 'var(--ion-color-danger)',
+            } as React.CSSProperties}
             title="Clear all transactions"
           >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg style={{ width: '1rem', height: '1rem' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
             </svg>
-          </button>
+          </IonButton>
         </div>
       </div>
       

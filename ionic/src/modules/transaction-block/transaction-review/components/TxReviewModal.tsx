@@ -7,6 +7,7 @@ import { cloneElement } from 'react'
 
 import { SwapReviewContent } from '../../swap/components/SwapReviewContent'
 import { useTxStore } from '../../store/useTxStore'
+import { IonButton } from '@ionic/react'
 
 export const TxReviewModal = () => {
   const {
@@ -43,21 +44,45 @@ export const TxReviewModal = () => {
   const modalContent = (
     <div className="overflow-hidden rounded-3xl border border-stroke-100 bg-cards-widget shadow-test-2">
       {renderContent()}
-      <button
+      <IonButton
         type="button"
-        className="flex w-full flex-row items-center justify-center gap-[0.38rem] border-t bg-text-3100/5 px-6 py-3 text-[0.875rem] font-medium text-text-3100 dark:border-[#3E3E4D66]"
+        style={{
+          '--background': 'rgba(49, 49, 73, 0.05)',
+          '--background-hover': 'rgba(49, 49, 73, 0.05)',
+          '--background-activated': 'rgba(49, 49, 73, 0.05)',
+          '--color': 'var(--text-3100)',
+          '--color-hover': 'var(--text-3100)',
+          '--color-activated': 'var(--text-3100)',
+          '--border-radius': '0 0 1.5rem 1.5rem',
+          '--box-shadow': 'none',
+          '--border-width': '1px 0 0 0',
+          '--border-style': 'solid',
+          '--border-color': 'var(--stroke-100)',
+          '--padding-top': '0.75rem',
+          '--padding-bottom': '0.75rem',
+          '--padding-start': '1.5rem',
+          '--padding-end': '1.5rem',
+          width: '100%',
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: '0.38rem',
+          fontSize: '0.875rem',
+          fontWeight: 500,
+        } as any}
         onClick={() => setCollapseTxInfo(!collapseTxInfo)}
       >
         {collapseTxInfo ? (
-          <>
+          <div className="flex items-center gap-2">
             <ExpandIcon className="size-4" /> See Details
-          </>
+          </div>
         ) : (
-          <>
+          <div className="flex items-center gap-2">
             <CollapseIcon className="size-4" /> Condense
-          </>
+          </div>
         )}
-      </button>
+      </IonButton>
     </div>
   )
 

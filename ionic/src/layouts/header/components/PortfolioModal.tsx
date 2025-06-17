@@ -11,6 +11,7 @@ import PortfolioButton from './PortfolioButton'
 import { PointsBalance } from '@modules/points-balance/PointsBalance'
 import { useTotalBalance } from '@hooks/tokens/useTotalBalance'
 import { UserTokens } from './UserTokens'
+import { IonButton } from '@ionic/react'
 
 interface PortfolioModalProperties extends React.HTMLAttributes<HTMLDivElement> {
   isOpen: boolean
@@ -61,15 +62,33 @@ export const PortfolioModal = ({
           >
             <div className="relative mr-3 flex items-start pt-2 max-md:mr-0">
               {!isMobile && (
-                <button
+                <IonButton
                   type="button"
                   onClick={onClose}
-                  className="flex size-12 items-center justify-center rounded-2xl border border-stroke-100 bg-cards-widget p-1"
+                  style={{
+                    '--background': 'var(--cards-widget)',
+                    '--background-hover': 'var(--cards-widget)',
+                    '--background-activated': 'var(--cards-widget)',
+                    '--color': 'var(--text-100)',
+                    '--color-hover': 'var(--text-100)',
+                    '--color-activated': 'var(--text-100)',
+                    '--border-radius': '1rem',
+                    '--box-shadow': 'none',
+                    '--border-width': '1px',
+                    '--border-style': 'solid',
+                    '--border-color': 'var(--stroke-100)',
+                    '--padding': '0',
+                    width: '3rem',
+                    height: '3rem',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  } as any}
                 >
                   <div className="flex size-full items-center justify-center rounded-xl p-2 hover:bg-[#8585A914] dark:hover:bg-transparent">
                     <ClosePortfolioIcon className="size-4 " />
                   </div>
-                </button>
+                </IonButton>
               )}
             </div>
             <div className="relative size-auto max-h-screen w-[30.125rem] overflow-y-auto rounded-3xl border border-stroke-100 bg-cards-widget pt-4 shadow-lg">
@@ -87,13 +106,31 @@ export const PortfolioModal = ({
                 <div className="flex  items-center justify-center gap-2 ">
                   <ThemeToggler />
                   {isMobile && (
-                    <button
+                    <IonButton
                       type="button"
                       onClick={onClose}
-                      className="flex size-12 items-center justify-center rounded-xl border border-stroke-100 bg-cards-widget hover:bg-transparent"
+                      style={{
+                        '--background': 'var(--cards-widget)',
+                        '--background-hover': 'var(--cards-widget)',
+                        '--background-activated': 'var(--cards-widget)',
+                        '--color': 'var(--text-100)',
+                        '--color-hover': 'var(--text-100)',
+                        '--color-activated': 'var(--text-100)',
+                        '--border-radius': '1rem',
+                        '--box-shadow': 'none',
+                        '--border-width': '1px',
+                        '--border-style': 'solid',
+                        '--border-color': 'var(--stroke-100)',
+                        '--padding': '0',
+                        width: '3rem',
+                        height: '3rem',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                      } as any}
                     >
                       <ClosePortfolioIcon />
-                    </button>
+                    </IonButton>
                   )}
                 </div>
               </div>

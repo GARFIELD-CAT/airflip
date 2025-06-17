@@ -1,3 +1,4 @@
+import { IonButton } from '@ionic/react'
 import { ROUTES } from '@routes/routes'
 import { motion } from 'framer-motion'
 import type { ComponentProps } from 'react'
@@ -104,7 +105,7 @@ export const NotFound = ({ className, ...rest }: NotFoundProperties) => {
             />
           </Link>
 
-          <button
+          <IonButton
             onClick={() => window.history.back()}
             className="hover:bg-main-8/10 group rounded-xl border border-stroke-100 bg-cards-widget px-8 py-4 text-[1.125rem] font-medium text-text-2100 transition-all duration-300 hover:shadow-lg"
           >
@@ -114,7 +115,7 @@ export const NotFound = ({ className, ...rest }: NotFoundProperties) => {
             >
               Go Back
             </motion.span>
-          </button>
+          </IonButton>
         </motion.div>
 
         {/* Decorative Elements */}

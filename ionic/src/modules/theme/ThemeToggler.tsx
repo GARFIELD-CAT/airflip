@@ -6,6 +6,7 @@ import type { ComponentProps } from 'react'
 import MoonV1Svg from './assets/moon-v1.svg'
 import SunV1Svg from './assets/sun-v1.svg'
 import { useTheme } from './ThemeProvider'
+import { IonButton } from '@ionic/react'
 
 interface ThemeToggleProperties extends ComponentProps<'div'> {}
 
@@ -21,13 +22,32 @@ export function ThemeToggler(props: ThemeToggleProperties) {
   }
 
   return (
-    <button
+    <IonButton
       onClick={toggleTheme}
-      className={cn(
-        'relative flex items-center w-auto h-auto rounded-[0.75rem] border border-stroke-100 p-1 gap-1 bg-misc-card',
-        'transition-colors cursor-pointer shadow-test',
-        className,
-      )}
+      style={{
+        '--background': 'var(--misc-card)',
+        '--background-hover': 'var(--misc-card)',
+        '--background-activated': 'var(--misc-card)',
+        '--color': 'var(--text-100)',
+        '--color-hover': 'var(--text-100)',
+        '--color-activated': 'var(--text-100)',
+        '--border-radius': '0.75rem',
+        '--box-shadow': 'var(--shadow-test)',
+        '--border-width': '1px',
+        '--border-style': 'solid',
+        '--border-color': 'var(--stroke-100)',
+        '--padding-start': '0.25rem',
+        '--padding-end': '0.25rem',
+        '--padding-top': '0.25rem',
+        '--padding-bottom': '0.25rem',
+        '--padding': '0.25rem',
+        width: 'auto',
+        height: 'auto',
+        display: 'flex',
+        alignItems: 'center',
+        gap: '0.25rem',
+        cursor: 'pointer',
+      } as any}
       type="button"
     >
       <motion.div
@@ -87,6 +107,6 @@ export function ThemeToggler(props: ThemeToggleProperties) {
           </div>
         </div>
       </div>
-    </button>
+    </IonButton>
   )
 }

@@ -8,6 +8,7 @@ import { LinkMenuItem } from './components/LinkMenuItem'
 import { MenuTrigger } from './components/MenuTrigger'
 import { NavLinkMenuItem } from './components/NavLinkMenuItem'
 import { useDesktopMenuArray } from './hooks/useMenu'
+import { IonButton } from '@ionic/react'
 
 const menuVariants = {
   closed: {
@@ -101,13 +102,41 @@ export const DesktopMenu = () => {
         )}
       </AnimatePresence>
       {isOpen && (
-        <button
+        <IonButton
           type="button"
-          className="absolute left-full top-0 -z-10 flex h-full w-[2.8rem] -translate-x-4 justify-end rounded-r-2xl bg-input-active pr-2 pt-3 text-right"
+          className="m-0 p-0 ion-btn-content-right"
+          style={{
+            '--background': 'var(--input-active)',
+            '--background-hover': 'var(--input-active)',
+            '--background-activated': 'var(--input-active)',
+            '--color': '#30303066',
+            '--color-hover': '#30303066',
+            '--color-activated': '#30303066',
+            '--border-radius': '1rem',
+            '--box-shadow': 'none',
+            '--padding-top': '0.75rem',
+            '--padding-bottom': '0',
+            '--padding-start': '0',
+            '--padding-end': '0.5rem',
+            '--padding': '0',
+            '--width': 'auto',
+            position: 'absolute',
+            left: '100%',
+            top: 0,
+            zIndex: -10,
+            height: '100%',
+            width: '2.8rem',
+            transform: 'translateX(-1rem)',
+            justifyContent: 'flex-end',
+            alignItems: 'flex-start',
+            textAlign: 'right',
+          } as any}
           onClick={() => setIsOpen(false)}
         >
-          <ChevronsLeft className="size-4 text-[#30303066]  hover:translate-x-1 dark:text-[#8585A9]" />
-        </button>
+          <div className="w-full flex justify-end">
+            <ChevronsLeft className="size-4 text-[#30303066]  hover:translate-x-1 dark:text-[#8585A9]" />
+          </div>
+        </IonButton>
       )}
     </motion.nav>
   )

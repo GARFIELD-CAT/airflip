@@ -8,6 +8,7 @@ import DollarInput from '../../shared/components/DollarInput'
 import { useInputsMode } from '../hooks/useInputsMode'
 import { SelectDepositAsset } from '../SelectDepositAssetModal'
 import { SelectToAsset } from '../SelectToAssetModal'
+import { IonButton } from '@ionic/react'
 
 interface Asset {
   balance: string | bigint
@@ -101,13 +102,32 @@ const FromTokenInput = ({
 
       {/* Secondary input with swap button */}
       <div className="flex items-center gap-2">
-        <button
+        <IonButton
           type="button"
           onClick={() => setIsSwapped(!isSwapped)}
-          className="flex size-6 min-w-6 items-center justify-center rounded border border-stroke-100 bg-[#FFF] [box-shadow:0px_2px_1px_0px_rgba(214,_200,_255,_0.22)] dark:bg-[#2D2D36] dark:shadow-none"
+          style={{
+            '--background': 'transparent',
+            '--background-hover': 'transparent',
+            '--background-activated': 'transparent',
+            '--color': 'var(--text-100)',
+            '--color-hover': 'var(--text-100)',
+            '--color-activated': 'var(--text-100)',
+            '--border-radius': '0.75rem',
+            '--border-width': '1px',
+            '--border-style': 'solid',
+            '--border-color': 'var(--stroke-100)',
+            '--padding': '0',
+            width: '1.5rem',
+            minWidth: '1.5rem',
+            height: '1.5rem',
+            minHeight: '1.5rem',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          } as any}
         >
           <SwitchIcon className="size-3.5" />
-        </button>
+        </IonButton>
         {isSwapped ? (
           <AmountInput
             value={fromTokenValue}
@@ -282,14 +302,38 @@ export const SwappableInputs = ({
 
       {/* To token input with right element */}
       <div className="relative rounded-2xl border border-solid border-stroke-100 bg-cards p-6">
-        <button
+        <IonButton
           type="button"
           onClick={onSwapTokens}
-          className="absolute -top-1 left-1/2 flex size-14 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-2xl border border-solid border-stroke-100 bg-cards dark:border"
+          style={{
+            '--background': 'var(--cards-widget)',
+            '--background-hover': 'var(--cards-widget)',
+            '--background-activated': 'var(--cards-widget)',
+            '--color': 'var(--text-100)',
+            '--color-hover': 'var(--text-100)',
+            '--color-activated': 'var(--text-100)',
+            '--border-radius': '1rem',
+            '--box-shadow': '0px 2px 8px 0px rgba(135,99,243,0.12)',
+            '--border-width': '1px',
+            '--border-style': 'solid',
+            '--border-color': 'var(--stroke-100)',
+            '--padding': '0',
+            width: '3.5rem',
+            minWidth: '3.5rem',
+            height: '3.5rem',
+            minHeight: '3.5rem',
+            position: 'absolute',
+            top: '-0.25rem',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          } as any}
           disabled={!onSwapTokens}
         >
           <SwitchIcon className="size-6 rotate-90" />
-        </button>
+        </IonButton>
         <h3 className="mb-3 font-medium text-[#99979A]">Buy</h3>
         <div className="flex items-start justify-between gap-2">
           <div className="min-w-0 flex-1">

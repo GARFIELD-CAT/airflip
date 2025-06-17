@@ -1,6 +1,7 @@
 import { SCAN_LINK_BY_CHAIN_ID } from '@constants/chains'
 
 import { useTxStore } from '../../store/useTxStore'
+import { IonButton } from '@ionic/react'
 
 interface TransactionStatusProps {
   type: 'swap' | 'deposit' | 'approve' | 'switch'
@@ -111,12 +112,12 @@ export const TransactionStatus = ({
             {error || 'An unknown error occurred'}
           </p>
           
-          <button
+          <IonButton
             onClick={() => window.location.reload()}
             className="px-4 py-2 bg-main-100 text-white rounded-lg hover:bg-main-80 transition-colors text-sm font-medium"
           >
             Try Again
-          </button>
+          </IonButton>
         </div>
       </div>
     )

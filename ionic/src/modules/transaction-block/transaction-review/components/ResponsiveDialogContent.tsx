@@ -5,6 +5,7 @@ import useDeviceWidth from '@hooks/common/useDeviceWidth'
 import { cn } from '@utils/cn'
 
 import type { ResponsiveDialogContentProperties } from '../../swap/types/types'
+import { IonButton } from '@ionic/react'
 
 export const ResponsiveDialogContent = ({
   className,
@@ -26,18 +27,29 @@ export const ResponsiveDialogContent = ({
       >
         {children}
 
-        <button
+        <IonButton
           type="button"
           aria-label="Close"
           onClick={() => setOpened(false)}
-          className={cn(
-            'm-auto flex size-[4.125rem] shrink-0 items-center justify-center',
-            'active:opacity-50',
-          )}
+          style={{
+            '--background': 'transparent',
+            '--box-shadow': 'none',
+            '--border-radius': '50%',
+            '--width': '4.125rem',
+            '--height': '4.125rem',
+            '--padding-start': '0',
+            '--padding-end': '0',
+            '--padding-top': '0',
+            '--padding-bottom': '0',
+            'margin': 'auto',
+            'display': 'flex',
+            'alignItems': 'center',
+            'justifyContent': 'center',
+          } as React.CSSProperties}
         >
-          <BigCloseBtn className="size-full dark:hidden" />
-          <BigCloseBtnDark className="hidden size-full dark:block" />
-        </button>
+          <BigCloseBtn style={{ width: '100%', height: '100%' }} className="dark:hidden" />
+          <BigCloseBtnDark style={{ width: '100%', height: '100%' }} className="hidden dark:block" />
+        </IonButton>
       </div>
     )
   }

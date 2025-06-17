@@ -35,7 +35,7 @@ export const SwapActionButton = ({
     return (
       <Button
         size="lg"
-        className="w-full rounded-2xl px-[1.88rem] py-4 text-base/6 normal-case max-lg:text-[0.9375rem]"
+        className="w-full text-base/6 normal-case max-lg:text-[0.9375rem]"
         onClick={() => openConnectModal({ view: 'Connect' })}
       >
         Connect
@@ -48,7 +48,7 @@ export const SwapActionButton = ({
       size="lg"
       disabled={!inputValue || !!error}
       className={cn(
-        'w-full rounded-2xl px-[1.88rem] py-4 text-base/6 normal-case hover:bg-main-80 max-lg:text-[0.9375rem]',
+        'w-full text-base/6 normal-case max-lg:text-[0.9375rem]',
         error && '!bg-red-5 !text-red-100',
       )}
       onClick={onModalOpen}

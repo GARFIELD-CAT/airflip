@@ -1,6 +1,7 @@
 import type { ITokenData } from '@api/tokens-balance/use-tokens-balance'
 import Check from '@assets/icons/check.svg'
 import { TokenIconComponent } from '@components/token-icon'
+import { IonButton } from '@ionic/react'
 import { formatAmountValue, formatTokenBalance } from '@utils/formatValue'
 
 export const TokensListItem = ({
@@ -16,11 +17,28 @@ export const TokensListItem = ({
 
   if (!token) return null
   return (
-    <button
+    <IonButton
       type="button"
       onClick={() => onChange(token)}
-      className="flex w-full cursor-pointer items-center justify-between rounded-xl px-5 py-4 hover:bg-input-active"
+      style={{
+        '--background': 'transparent',
+        '--background-hover': 'var(--input-active)',
+        '--background-activated': 'var(--input-active)',
+        '--box-shadow': 'none',
+        '--border-radius': '0.75rem',
+        '--padding-start': '1.25rem',
+        '--padding-end': '1.25rem',
+        '--padding-top': '1rem',
+        '--padding-bottom': '1rem',
+        '--width': '100%',
+        '--height': 'auto',
+        'display': 'flex',
+        'alignItems': 'center',
+        'justifyContent': 'space-between',
+        'cursor': 'pointer',
+      } as React.CSSProperties}
     >
+      <div className="flex items-center justify-between w-full">
       <div className="flex items-center gap-[0.67rem]">
         <TokenIconComponent
           className="size-10 overflow-hidden rounded-full"
@@ -58,6 +76,7 @@ export const TokensListItem = ({
         </div>
         {selected && <Check className="size-4" />}
       </div>
-    </button>
+      </div>
+    </IonButton>
   )
 }

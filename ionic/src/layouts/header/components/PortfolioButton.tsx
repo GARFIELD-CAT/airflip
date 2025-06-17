@@ -3,6 +3,7 @@ import CopyIcon from '@assets/icons/copy-icon.svg'
 import DoubleArrow from '@assets/icons/double-arrow.svg'
 import LogoutIcon from '@assets/icons/logout-icon.svg'
 import Avatar from '@assets/images/avatar.jpg'
+import { IonButton } from '@ionic/react'
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
 import { shortenAddress } from '@utils/transform'
 import React from 'react'
@@ -48,9 +49,29 @@ const PortfolioButton: React.FC<PortfolioButtonProperties> = ({
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
-        <button
+        <IonButton
           type="button"
-          className="size-auto rounded-2xl border border-solid border-stroke-100 bg-white shadow-test-2 transition-colors dark:border-stroke-40100 dark:bg-cards-widget max-md:h-10 max-md:w-auto max-md:rounded-xl"
+          className="bg-white rounded-2xl dark:bg-cards-widget shadow-test"
+          style={{
+            '--background': 'transparent',
+            '--background-hover': 'transparent',
+            '--background-activated': 'transparent',
+            '--color': 'var(--text-100)',
+            '--color-hover': 'var(--text-100)',
+            '--color-activated': 'var(--text-100)',
+            '--border-radius': '1rem',
+            '--box-shadow': 'none',
+            '--border-width': '1px',
+            '--border-style': 'solid',
+            '--border-color': 'var(--stroke-100)',
+            '--padding-top': '0',
+            '--padding-bottom': '0',
+            '--padding-start': '0',
+            '--padding-end': '0',
+            '--padding': '0',
+            height: 'auto',
+            minWidth: 'auto',
+          } as any}
           onClick={handleClick}
         >
           <div className="flex w-full">
@@ -63,19 +84,18 @@ const PortfolioButton: React.FC<PortfolioButtonProperties> = ({
               </p>
             </div>
             {!isMobile && (
-              <button
+              <div
                 className="flex items-center justify-center rounded-r-2xl px-3 transition-colors dark:border-stroke-40100"
-                type="button"
               >
                 {context === 'modal' ? (
                   <ArrowRight className="size-4" />
                 ) : (
                   <DoubleArrow className="size-4" />
                 )}
-              </button>
+              </div>
             )}
           </div>
-        </button>
+        </IonButton>
       </DropdownMenu.Trigger>
       {isOpen && isMobile && (
         <DropdownMenu.Content

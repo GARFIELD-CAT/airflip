@@ -11,12 +11,12 @@ const NotFound = lazy(() => import('@pages/404/NotFound').then(module => ({ defa
 export const IonicApp = () => {
   return (
     <IonReactRouter>
-      <IonRouterOutlet>
+      <IonRouterOutlet id="main-content">
         <Suspense fallback={<div>Loading...</div>}>
           <Switch>
             <Route exact path="/" render={() => <Redirect to={ROUTES.SWAP} />} />
-            <Route exact path={ROUTES.SWAP} render={(props) => <BaseLayout component={Swap} {...props} />} />
-            <Route path="*" render={(props) => <BaseLayout component={NotFound} {...props} />} />
+            <Route exact path={ROUTES.SWAP} render={(props) => <BaseLayout component={Swap} pageTitle="Swap" {...props} />} />
+            <Route path="*" render={(props) => <BaseLayout component={NotFound} pageTitle="Not Found" {...props} />} />
           </Switch>
         </Suspense>
       </IonRouterOutlet>
