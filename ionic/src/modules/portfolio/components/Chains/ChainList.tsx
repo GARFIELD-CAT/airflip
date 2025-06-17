@@ -6,6 +6,7 @@ import { cn } from '@utils/cn'
 import { formatTokenBalance, formatUsdValue } from '@utils/formatValue'
 import type { ComponentProps } from 'react'
 import { useState } from 'react'
+import { IonList, IonItem } from '@ionic/react'
 
 interface ChainsListProperties extends ComponentProps<'div'> {
   tokens: ITokenData[]
@@ -61,43 +62,56 @@ const ChainItem = ({
         </div>
       </div>
       {isOpen && (
-        <div className="left-0 z-10 mx-1 mt-2 w-auto    max-md:text-sm">
+        <IonList className="left-0 z-10 mx-1 mt-2 w-auto max-md:text-sm">
           {tokens.map((token) => (
-            <div
+            <IonItem
               key={token.contract_ticker_symbol}
-              className="flex select-none items-center justify-between rounded-lg px-6 py-4 hover:bg-[#8585A90D] max-md:px-3"
+              className="flex select-none items-center justify-between rounded-lg px-6 py-4 hover:bg-[#8585A90D] max-md:px-3 text-text-100"
+              style={{
+                '--background': 'transparent',
+                '--background-hover': 'var(--input-active)',
+                '--background-activated': 'var(--input-active)',
+                '--border-radius': '0.75rem',
+                '--padding-start': '1.5rem',
+                '--padding-end': '1.5rem',
+                '--padding-top': '1rem',
+                '--padding-bottom': '1rem',
+                '--inner-border-width': '0',
+              } as React.CSSProperties}
             >
-              <div className="flex items-center">
-                <TokenIconComponent
-                  symbol={token.contract_ticker_symbol}
-                  className="size-12 overflow-hidden rounded-full max-md:size-10"
-                  tokenLogoFallback={token.logo_url}
-                />
+              <div className="flex items-center justify-between w-full">
+                <div className="flex items-center">
+                  <TokenIconComponent
+                    symbol={token.contract_ticker_symbol}
+                    className="size-12 overflow-hidden rounded-full max-md:size-10"
+                    tokenLogoFallback={token.logo_url}
+                  />
 
-                <div className="ml-2 flex flex-col">
-                  <span className="">
-                    {formatTokenBalance(token.balance, token.contract_decimals)}{' '}
-                    {token.contract_ticker_symbol}
-                  </span>
-                  <div className="flex  flex-row items-center gap-1">
-                    <TokenIconComponent
-                      symbol={chainId}
-                      className="size-4 rounded-full"
-                      tokenLogoFallback={
-                        CHAIN_NAMES_BY_ID[chainId as keyof typeof CHAIN_NAMES_BY_ID]
-                      }
-                    />
-                    <span className="text-sm text-text-2100">{chainName}</span>
+                  <div className="ml-2 flex flex-col">
+                    <span className="">
+                      {formatTokenBalance(token.balance, token.contract_decimals)}{' '}
+                      {token.contract_ticker_symbol}
+                    </span>
+                    <div className="flex flex-row items-center gap-1">
+                      <TokenIconComponent
+                        symbol={chainId}
+                        className="size-4 rounded-full"
+                        tokenLogoFallback={
+                          CHAIN_NAMES_BY_ID[chainId as keyof typeof CHAIN_NAMES_BY_ID]
+                        }
+                      />
+                      <span className="text-sm text-text-2100">{chainName}</span>
+                    </div>
                   </div>
                 </div>
+                <div className="text-right">
+                  <p className="text-base">{formatUsdValue(token.balance_usd)}</p>
+                  <p className="text-sm" />
+                </div>
               </div>
-              <div className="text-right">
-                <p className="text-base">{formatUsdValue(token.balance_usd)}</p>
-                <p className="text-sm " />
-              </div>
-            </div>
+            </IonItem>
           ))}
-        </div>
+        </IonList>
       )}
     </div>
   )
@@ -129,21 +143,19 @@ export const ChainsList = ({
   )
 
   return (
-    <>
-      <div className={cn(`px-1 pb-1`, className)}>
-        <div className={cn(' py-4 flex flex-col gap-1 rounded-xl ')}>
-          {Object.values(groupedByChain).map(
-            ({ chainId, totalUsdValue, tokens: chainTokens }, i) => (
-              <ChainItem
-                key={i}
-                chainId={chainId}
-                totalUsdValue={totalUsdValue}
-                tokens={chainTokens}
-              />
-            ),
-          )}
-        </div>
+    <IonList className={cn(`px-1 pb-1`, className)}>
+      <div className={cn('py-4 flex flex-col gap-1 rounded-xl')}>
+        {Object.values(groupedByChain).map(
+          ({ chainId, totalUsdValue, tokens: chainTokens }, i) => (
+            <ChainItem
+              key={i}
+              chainId={chainId}
+              totalUsdValue={totalUsdValue}
+              tokens={chainTokens}
+            />
+          ),
+        )}
       </div>
-    </>
+    </IonList>
   )
 }

@@ -135,7 +135,7 @@ export const PortfolioModal = ({
                 </div>
               </div>
               <div className="px-6">
-                <div className="text-[#F4F2F5] text-[2rem] font-medium">
+                <div className="text-text-80 text-[2rem] font-medium">
                   {isTotalBalanceLoading ? 'Loading...' : `${formattedBalance}`}
                 </div>
               </div>

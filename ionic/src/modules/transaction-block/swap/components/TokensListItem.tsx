@@ -1,7 +1,7 @@
 import type { ITokenData } from '@api/tokens-balance/use-tokens-balance'
 import Check from '@assets/icons/check.svg'
 import { TokenIconComponent } from '@components/token-icon'
-import { IonButton } from '@ionic/react'
+import { IonButton, IonItem } from '@ionic/react'
 import { formatAmountValue, formatTokenBalance } from '@utils/formatValue'
 
 export const TokensListItem = ({
@@ -13,13 +13,21 @@ export const TokensListItem = ({
   onChange: (token: ITokenData) => void
   selected: boolean
 }) => {
-  console.log('TokensListItem received token:', token)
 
   if (!token) return null
   return (
+    <IonItem
+    key={`${token.contract_address}-${token.chain_id}`}
+    style={{
+      '--background': 'transparent',
+      '--background-hover': 'var(--input-active)',
+      '--background-activated': 'var(--input-active)',
+      '--inner-border-width': '0',
+    } as React.CSSProperties}>
     <IonButton
       type="button"
       onClick={() => onChange(token)}
+      className="w-full"
       style={{
         '--background': 'transparent',
         '--background-hover': 'var(--input-active)',
@@ -78,5 +86,6 @@ export const TokensListItem = ({
       </div>
       </div>
     </IonButton>
+    </IonItem>
   )
 }

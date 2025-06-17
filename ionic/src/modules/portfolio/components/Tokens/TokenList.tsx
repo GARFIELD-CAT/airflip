@@ -11,6 +11,7 @@ import type { ComponentProps } from 'react'
 import { useState, useMemo } from 'react'
 import { DragDropContext, Draggable } from 'react-beautiful-dnd'
 import { formatUnits } from 'viem'
+import { IonList, IonItem } from '@ionic/react'
 
 import tokenGroups from './tokenGroups.json'
 
@@ -126,13 +127,26 @@ const GroupedTokenItem = ({
           </div>
 
           {isOpen && (
-            <div className="mt-1 select-none rounded-lg px-1">
+            <IonList className="mt-1 select-none rounded-lg px-1">
               {tokenGroup.map((token) => (
-                <div
+                <IonItem
                   key={token.contract_ticker_symbol}
-                  className="flex items-center justify-between rounded-xl px-6 py-4 hover:bg-[#8585A90D] max-md:px-3"
+                  className="flex items-center justify-between rounded-xl px-6 py-4 hover:bg-[#8585A90D] max-md:px-3 text-text-100"
+                  style={{
+                    '--background': 'transparent',
+                    '--background-hover': 'var(--input-active)',
+                    '--background-activated': 'var(--input-active)',
+                    '--border-radius': '0.75rem',
+                    '--padding-start': '1.5rem',
+                    '--padding-end': '1.5rem',
+                    '--padding-top': '1rem',
+                    '--padding-bottom': '1rem',
+                    '--inner-border-width': '0',
+                  } as React.CSSProperties}
                 >
-                  <div className="flex  items-center gap-2">
+                  <div className="flex items-center justify-between w-full">
+
+                  <div className="flex items-center gap-2">
                     <TokenIconComponent
                       symbol={token.contract_ticker_symbol}
                       className="size-12 overflow-hidden rounded-full max-lg:size-10"
@@ -159,11 +173,12 @@ const GroupedTokenItem = ({
                     <p className="text-base">
                       <span className="text-text-2100">$</span>
                       {formatAmount(token.balance_usd)}
-                    </p>
+                      </p>
+                    </div>
                   </div>
-                </div>
+                </IonItem>
               ))}
-            </div>
+            </IonList>
           )}
         </div>
       )}

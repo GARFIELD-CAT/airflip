@@ -1,4 +1,3 @@
-import Search from '@assets/icons/search.svg'
 import { SystemMessage } from '@components/system-message'
 import { Dialog, DialogTrigger } from '@components/ui/dialog'
 import { Drawer, DrawerContent, DrawerTrigger } from '@components/ui/drawer'
@@ -11,6 +10,7 @@ import { SelectChainTrigger } from '@modules/transaction-block/swap/components/S
 import { SelectNetworkPopover } from '@modules/transaction-block/shared/components/SelectNetworkPopover'
 import type { HTMLAttributes, ReactNode } from 'react'
 import { useCallback, useState } from 'react'
+import { IonList, IonSearchbar } from '@ionic/react'
 
 interface TokensByChain<T> {
   [chain: string]: T[]
@@ -85,22 +85,24 @@ export const UniversalSelectModal = <T, R = T>({
       {(filterBySearch || filterByNetwork) && (
         <div className="relative flex w-full items-stretch gap-2 px-6 py-4 max-lg:max-w-full">
           {filterBySearch && (
-            <label
-              htmlFor="search-input"
-              className="flex grow items-center gap-2 rounded-xl border border-stroke-40100 bg-input-active  px-6 py-4"
-            >
-              <span className="sr-only">Search tokens</span>
-              <Search />
-              <input
-                id="search-input"
-                name="search-input"
-                value={searchValue}
-                onChange={(e) => setSearchValue(e.target.value)}
-                type="text"
-                className="max-w-full bg-transparent text-lg placeholder:text-gray-100 focus:outline-none max-lg:max-w-24"
-                placeholder="Search"
-              />
-            </label>
+            <IonSearchbar
+              value={searchValue}
+              onIonInput={(e) => setSearchValue(e.detail.value || '')}
+              placeholder="Search"
+              className="grow rounded-xl border border-stroke-40100 bg-input-active"
+              style={{
+                '--background': 'transparent',
+                '--color': 'var(--text-1100)',
+                '--placeholder-color': 'var(--text-2100)',
+                '--icon-color': 'var(--text-2100)',
+                '--clear-button-color': 'var(--text-2100)',
+                '--border-radius': '0.75rem',
+                '--padding-start': '1.5rem',
+                '--padding-end': '1.5rem',
+                '--padding-top': '1rem',
+                '--padding-bottom': '1rem',
+              } as React.CSSProperties}
+            />
           )}
           {filterByNetwork && (
             <SelectNetworkPopover
@@ -114,7 +116,7 @@ export const UniversalSelectModal = <T, R = T>({
       )}
 
       <ScrollArea className="h-[19.5rem] overscroll-none px-1 max-lg:grow">
-        <div className="space-y-1">
+        <IonList className="space-y-1">
           {isLoading && (
             <>
               {Array.from({ length: 4 }).map((_, i) => (
@@ -139,7 +141,7 @@ export const UniversalSelectModal = <T, R = T>({
               message="Whoops...This token was not found"
             />
           )}
-        </div>
+        </IonList>
       </ScrollArea>
     </>
   )
@@ -161,7 +163,7 @@ export const UniversalSelectModal = <T, R = T>({
     <Dialog open={opened} onOpenChange={handleOpenChange}>
       <DialogTrigger>{trigger}</DialogTrigger>
       <ResponsiveDialogContent
-        className="max-w-[31.25rem]  border border-stroke-100"
+        className="max-w-[31.25rem] border border-stroke-100"
         opened={opened}
         setOpened={handleOpenChange}
         showCloseButton
