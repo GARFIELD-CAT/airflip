@@ -44,7 +44,7 @@ export const Header = ({ className, ...rest }: HeaderProperties) => {
           <PortfolioModal isOpen={isOpen} onClose={handlePortfolioClose} />
         </div>
       ) : (
-        <ConnectWallet className="rounded-[12.5rem] bg-cards-widget px-6 py-4 text-[1.25rem] text-gray-100 dark:bg-[rgba(153,_152,_184,_0.10)] dark:text-white" />
+        <ConnectWallet />
       )}
     </header>
   )

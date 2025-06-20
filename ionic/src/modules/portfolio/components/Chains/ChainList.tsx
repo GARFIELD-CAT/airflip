@@ -62,7 +62,11 @@ const ChainItem = ({
         </div>
       </div>
       {isOpen && (
-        <IonList className="left-0 z-10 mx-1 mt-2 w-auto max-md:text-sm">
+        <IonList className="left-0 z-10 mx-1 mt-2 w-auto max-md:text-sm" style={{
+          '--background': 'transparent',
+          '--background-hover': 'transparent',
+          '--background-activated': 'transparent',
+        } as React.CSSProperties}>
           {tokens.map((token) => (
             <IonItem
               key={token.contract_ticker_symbol}
@@ -143,7 +147,11 @@ export const ChainsList = ({
   )
 
   return (
-    <IonList className={cn(`px-1 pb-1`, className)}>
+    <IonList className={cn(`px-1 pb-1`, className)} style={{
+      '--background': 'transparent',
+      '--background-hover': 'transparent',
+      '--background-activated': 'transparent',
+    } as React.CSSProperties}>
       <div className={cn('py-4 flex flex-col gap-1 rounded-xl')}>
         {Object.values(groupedByChain).map(
           ({ chainId, totalUsdValue, tokens: chainTokens }, i) => (

@@ -3,14 +3,9 @@ import { useAccountManager } from '@hooks/accounts'
 import { IonButton } from '@ionic/react'
 import { useAppKit } from '@reown/appkit/react'
 import { shortenAddress } from '@utils/transform'
-import clsx from 'clsx'
 import { useAccount, useDisconnect } from 'wagmi'
 
-interface IConnectWalletProperties {
-  className?: string
-}
-
-export const ConnectWallet = ({ className }: IConnectWalletProperties) => {
+export const ConnectWallet = () => {
   const { open: openConnectModal } = useAppKit()
   const { disconnect } = useDisconnect()
   const { address } = useAccount()

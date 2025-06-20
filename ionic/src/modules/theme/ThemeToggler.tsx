@@ -1,17 +1,13 @@
 import { useAppKitTheme } from '@reown/appkit/react'
 import { cn } from '@utils/cn'
 import { motion } from 'framer-motion'
-import type { ComponentProps } from 'react'
 
 import MoonV1Svg from './assets/moon-v1.svg'
 import SunV1Svg from './assets/sun-v1.svg'
 import { useTheme } from './ThemeProvider'
 import { IonButton } from '@ionic/react'
 
-interface ThemeToggleProperties extends ComponentProps<'div'> {}
-
-export function ThemeToggler(props: ThemeToggleProperties) {
-  const { className } = props
+export function ThemeToggler() {
   const { setTheme, theme } = useTheme()
   const { setThemeMode } = useAppKitTheme()
 

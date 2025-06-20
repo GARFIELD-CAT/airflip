@@ -569,6 +569,11 @@
     viem "^2.21.25"
     wagmi "^2.12.16"
 
+"@capacitor/android@7.3.0":
+  version "7.3.0"
+  resolved "https://registry.yarnpkg.com/@capacitor/android/-/android-7.3.0.tgz#68a14f0c3ad1779852237c6932433a22e145a61a"
+  integrity sha512-TqUm+Z3Uk7/rET+adNDKD63JtA0AN+pMQlFRcLPmZJHFmJl6bUOWWELVL0Ixl5XaweTxofNKeDAjjLRIs+wd3g==
+
 "@capacitor/core@^7.3.0":
   version "7.3.0"
   resolved "https://registry.yarnpkg.com/@capacitor/core/-/core-7.3.0.tgz#208074f35d59d8150ec2ce40c8be9639f7f78965"

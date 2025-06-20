@@ -1,10 +1,10 @@
-import { Button } from '@components/ui/button'
+import { IonButton } from '@ionic/react'
 import { getRandomOkAnalog } from '@utils/phrases'
 import type { ComponentProps } from 'react'
 
 import { useTxStore } from '../../store/useTxStore'
 
-interface SuccessButtonProperties extends ComponentProps<'button'> {
+interface SuccessButtonProperties extends ComponentProps<typeof IonButton> {
   onSuccess?: () => void
   className?: string
 }
@@ -26,8 +26,8 @@ export const SuccessButton: React.FC<SuccessButtonProperties> = ({
   }
 
   return (
-    <Button type="button" onClick={handleSuccess} className={className} {...props}>
+    <IonButton type="button" onClick={handleSuccess} className={className} {...props}>
       {getRandomOkAnalog()}
-    </Button>
+    </IonButton>
   )
 }

@@ -127,7 +127,11 @@ const GroupedTokenItem = ({
           </div>
 
           {isOpen && (
-            <IonList className="mt-1 select-none rounded-lg px-1">
+            <IonList className="mt-1 select-none rounded-lg px-1" style={{
+              '--background': 'transparent',
+              '--background-hover': 'transparent',
+              '--background-activated': 'transparent',
+            } as React.CSSProperties}>
               {tokenGroup.map((token) => (
                 <IonItem
                   key={token.contract_ticker_symbol}
@@ -223,7 +227,9 @@ export default function TokenList({
   }
 
   return (
-    <div className={cn('px-1 pb-1', className)}>
+    <div className={cn('px-1 pb-1', className)} style={{
+      '--background': 'transparent',
+    } as React.CSSProperties}>
       <DragDropContext onDragEnd={handleDragEnd}>
         <StrictModeDroppable droppableId="token-groups">
           {(provided) => (
@@ -231,6 +237,9 @@ export default function TokenList({
               {...provided.droppableProps}
               ref={provided.innerRef}
               className="flex flex-col gap-1 rounded-xl py-4 text-base max-md:py-1 max-md:text-sm"
+              style={{
+                '--background': 'transparent',
+              } as React.CSSProperties}
             >
               {orderedTokenGroups.map(({ groupName, tokenGroup }, index) => (
                 <GroupedTokenItem

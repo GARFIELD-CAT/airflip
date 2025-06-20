@@ -1,8 +1,27 @@
-# React + TypeScript + Vite
+# Airflip Ionic App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Мобильное приложение Airflip, построенное на Ionic Framework с React.
 
-Currently, two official plugins are available:
+## 🚀 Запуск веб версии
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Установка зависимостей
+
+```bash
+yarn install
+```
+
+### Разработка
+
+```bash
+# Запуск в режиме разработки
+yarn dev
+
+# Приложение будет доступно по адресу: http://localhost:5173
+```
+
+## 📱 APK файл
+
+В папке проекта есть готовый APK файл для Android:
+- `airflip-app-fixed.apk`
+
+Установите APK на Android устройство для тестирования мобильной версии. 

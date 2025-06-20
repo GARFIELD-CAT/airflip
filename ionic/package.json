@@ -1,5 +1,5 @@
 {
-	"name": "maat-finance",
+	"name": "airflip-app",
 	"private": true,
 	"version": "0.0.0",
 	"type": "module",
@@ -22,6 +22,7 @@
 		"@0xsquid/sdk": "^2.8.23",
 		"@0xsquid/squid-types": "^0.1.84",
 		"@amcharts/amcharts5": "^5.9.11",
+		"@capacitor/android": "7.3.0",
 		"@capacitor/core": "^7.3.0",
 		"@capacitor/ios": "^7.3.0",
 		"@covalenthq/client-sdk": "^1.0.2",

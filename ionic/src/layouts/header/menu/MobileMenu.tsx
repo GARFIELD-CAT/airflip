@@ -125,7 +125,7 @@ export const MobileMenu = () => {
                   })}
                 </ul>
                 <div className="flex flex-col items-stretch gap-12">
-                  <ThemeToggler className="self-start" />
+                  <ThemeToggler />
                   <Socials />
                 </div>
               </motion.div>

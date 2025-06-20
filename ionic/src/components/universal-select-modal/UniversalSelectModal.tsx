@@ -116,7 +116,11 @@ export const UniversalSelectModal = <T, R = T>({
       )}
 
       <ScrollArea className="h-[19.5rem] overscroll-none px-1 max-lg:grow">
-        <IonList className="space-y-1">
+        <IonList className="space-y-1" style={{
+          '--background': 'transparent',
+          '--background-hover': 'transparent',
+          '--background-activated': 'transparent',
+        } as React.CSSProperties}>
           {isLoading && (
             <>
               {Array.from({ length: 4 }).map((_, i) => (
