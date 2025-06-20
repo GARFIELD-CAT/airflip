@@ -1,13 +1,14 @@
 import { cn } from '@utils/cn'
+import { IonInput } from '@ionic/react'
 import type { ComponentProps } from 'react'
 import { forwardRef, useEffect, useId, useRef, useState } from 'react'
 
 const DEFAULT_DECIMALS = 18
 const DEFAULT_PLACEHOLDER = '0.00'
 
-interface AmountInputProperties extends Omit<ComponentProps<'input'>, 'onChange'> {
+interface AmountInputProperties extends Omit<ComponentProps<typeof IonInput>, 'onIonInput' | 'onChange'> {
   /** Callback when input value changes */
-  onChange?: (value: string) => void
+  onValueChange?: (value: string) => void
   /** Error state */
   error?: string
   /** Maximum number of decimal places */
@@ -43,10 +44,10 @@ const formatInputValue = (value: string, decimals: number): string => {
   return formattedValue.replace(/^0+/, '0')
 }
 
-export const AmountInput = forwardRef<HTMLInputElement, AmountInputProperties>(
+export const AmountInput = forwardRef<HTMLIonInputElement, AmountInputProperties>(
   (props, reference) => {
     const {
-      onChange,
+      onValueChange,
       value,
       error,
       decimals = DEFAULT_DECIMALS,
@@ -67,9 +68,10 @@ export const AmountInput = forwardRef<HTMLInputElement, AmountInputProperties>(
       }
     }, [value])
 
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-      const formattedValue = formatInputValue(event.target.value, decimals)
-      onChange?.(formattedValue)
+    const handleChange = (event: CustomEvent) => {
+      const inputValue = event.detail.value || ''
+      const formattedValue = formatInputValue(inputValue, decimals)
+      onValueChange?.(formattedValue)
     }
 
     const baseInputClasses = cn(
@@ -85,7 +87,7 @@ export const AmountInput = forwardRef<HTMLInputElement, AmountInputProperties>(
 
     return (
       <div className={cn('relative size-full min-h-10', wrapperClassName)}>
-        <label htmlFor={id} className="flex items-center">
+        <div className="flex items-center">
           {/* Hidden element for measuring input width */}
           <span
             ref={measureReference}
@@ -99,21 +101,36 @@ export const AmountInput = forwardRef<HTMLInputElement, AmountInputProperties>(
           </span>
 
           {/* Actual input element */}
-          <input
+          <IonInput
             id={id}
             {...rest}
             type="text"
-            inputMode="decimal"
+            inputmode="decimal"
             placeholder={DEFAULT_PLACEHOLDER}
-            style={{ width: `${inputWidth}px` }}
+            style={{ 
+              width: `${inputWidth}px`,
+              '--background': 'transparent',
+              '--color': error ? 'var(--red-100)' : (after ? 'var(--text-2100)' : 'var(--text-100)'),
+              '--placeholder-color': 'var(--text-20)',
+              '--padding-start': '0',
+              '--padding-end': '0',
+              '--padding-top': '0',
+              '--padding-bottom': '0',
+              '--border': 'none',
+              '--border-radius': '0',
+              '--box-shadow': 'none',
+              '--outline': 'none',
+              '--font-size': '2.625rem',
+              '--font-weight': '500',
+              '--line-height': '3.25rem',
+              '--letter-spacing': '-0.02625rem',
+            } as React.CSSProperties}
             className={cn(
               baseInputClasses,
               'focus:outline-none',
               className,
-              after && 'text-text-2100',
-              error && 'text-red-100',
             )}
-            onChange={handleChange}
+            onIonInput={handleChange}
             value={value === '0.00' ? '' : value}
             ref={reference}
           />
@@ -129,7 +146,7 @@ export const AmountInput = forwardRef<HTMLInputElement, AmountInputProperties>(
               {after}
             </span>
           )}
-        </label>
+        </div>
       </div>
     )
   },

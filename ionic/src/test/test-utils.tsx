@@ -2,6 +2,10 @@ import { render, type RenderOptions } from '@testing-library/react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { type ReactElement, type ReactNode } from 'react'
 import { BrowserRouter } from 'react-router-dom'
+import { IonApp, setupIonicReact } from '@ionic/react'
+
+// Setup Ionic for testing
+setupIonicReact()
 
 // Create a custom render function that includes providers
 const createTestQueryClient = () =>
@@ -25,11 +29,13 @@ const AllTheProviders = ({ children }: AllTheProvidersProps) => {
   const queryClient = createTestQueryClient()
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        {children}
-      </BrowserRouter>
-    </QueryClientProvider>
+    <IonApp>
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+          {children}
+        </BrowserRouter>
+      </QueryClientProvider>
+    </IonApp>
   )
 }
 

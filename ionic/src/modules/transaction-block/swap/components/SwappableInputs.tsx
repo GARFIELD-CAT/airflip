@@ -95,7 +95,7 @@ const FromTokenInput = ({
             value={fromTokenValue}
             error={error}
             decimals={DECIMALS}
-            onChange={onFromTokenValueChange}
+            onValueChange={onFromTokenValueChange}
           />
         )}
       </div>
@@ -135,7 +135,7 @@ const FromTokenInput = ({
             decimals={DECIMALS}
             className="text-[1rem] max-lg:text-[0.8125rem]"
             wrapperClassName="!min-h-0 !h-[1.5rem]"
-            onChange={onFromTokenValueChange}
+            onValueChange={onFromTokenValueChange}
             after={fromTokenLabel || fromAsset.contract_ticker_symbol}
           />
         ) : (
@@ -198,7 +198,7 @@ const ToTokenInput = ({
           <AmountInput
             value={toTokenValue}
             decimals={DECIMALS}
-            onChange={() => {}} // Read-only, no changes allowed
+            onValueChange={() => {}} // Read-only, no changes allowed
             disabled
           />
         )}
@@ -212,7 +212,7 @@ const ToTokenInput = ({
             decimals={DECIMALS}
             className="text-[1rem] max-lg:text-[0.8125rem]"
             wrapperClassName="!min-h-0 !h-[1.5rem]"
-            onChange={() => {}}
+            onValueChange={() => {}}
             after={toTokenLabel || toAsset.contract_ticker_symbol}
             disabled
           />

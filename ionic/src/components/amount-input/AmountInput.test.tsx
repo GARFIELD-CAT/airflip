@@ -8,7 +8,7 @@ import { AmountInput } from './AmountInput'
 
 describe('AmountInput Integration Tests', () => {
   const user = userEvent.setup()
-  const mockOnChange = vi.fn()
+  const mockOnValueChange = vi.fn()
 
   beforeEach(() => {
     vi.clearAllMocks()
@@ -16,45 +16,45 @@ describe('AmountInput Integration Tests', () => {
 
   describe('Number Formatting Logic', () => {
     it('should add leading zero for decimal starting with dot', async () => {
-      render(<AmountInput value="" onChange={mockOnChange} />)
+      render(<AmountInput value="" onValueChange={mockOnValueChange} />)
 
       const input = screen.getByRole('textbox')
       await user.type(input, '.')
 
-      expect(mockOnChange).toHaveBeenCalledWith('0.')
+      expect(mockOnValueChange).toHaveBeenCalledWith('0.')
     })
 
     it('should limit decimal places based on decimals prop', async () => {
-      render(<AmountInput value="123.45" onChange={mockOnChange} decimals={2} />)
+      render(<AmountInput value="123.45" onValueChange={mockOnValueChange} decimals={2} />)
 
       const input = screen.getByRole('textbox')
       await user.type(input, '6')
 
-      expect(mockOnChange).toHaveBeenCalledWith('123.45')
+      expect(mockOnValueChange).toHaveBeenCalledWith('123.45')
     })
 
     it('should remove non-numeric characters', async () => {
-      render(<AmountInput value="" onChange={mockOnChange} />)
+      render(<AmountInput value="" onValueChange={mockOnValueChange} />)
 
       const input = screen.getByRole('textbox')
       await user.type(input, 'a')
 
-      expect(mockOnChange).toHaveBeenCalledWith('')
+      expect(mockOnValueChange).toHaveBeenCalledWith('')
     })
 
     it('should handle multiple decimal points correctly', async () => {
-      render(<AmountInput value="123." onChange={mockOnChange} />)
+      render(<AmountInput value="123." onValueChange={mockOnValueChange} />)
 
       const input = screen.getByRole('textbox')
       await user.type(input, '.')
 
-      expect(mockOnChange).toHaveBeenCalledWith('123.')
+      expect(mockOnValueChange).toHaveBeenCalledWith('123.')
     })
   })
 
   describe('Error State Integration', () => {
     it('should apply error styling when error prop is provided', () => {
-      render(<AmountInput value="100" onChange={mockOnChange} error="Test error" />)
+      render(<AmountInput value="100" onValueChange={mockOnValueChange} error="Test error" />)
 
       const input = screen.getByRole('textbox')
       expect(input).toHaveClass('text-red-100')
@@ -62,7 +62,7 @@ describe('AmountInput Integration Tests', () => {
 
     it('should apply error styling to suffix when error is present', () => {
       render(
-        <AmountInput value="100" onChange={mockOnChange} error="Test error" after="ETH" />
+        <AmountInput value="100" onValueChange={mockOnValueChange} error="Test error" after="ETH" />
       )
 
       const suffix = screen.getByText('ETH')
@@ -72,14 +72,14 @@ describe('AmountInput Integration Tests', () => {
 
   describe('Special Value Handling', () => {
     it('should not display "0.00" as value', () => {
-      render(<AmountInput value="0.00" onChange={mockOnChange} />)
+      render(<AmountInput value="0.00" onValueChange={mockOnValueChange} />)
 
       const input = screen.getByRole('textbox')
       expect(input).toHaveValue('')
     })
 
     it('should display suffix when provided', () => {
-      render(<AmountInput value="100" onChange={mockOnChange} after="ETH" />)
+      render(<AmountInput value="100" onValueChange={mockOnValueChange} after="ETH" />)
 
       expect(screen.getByText('ETH')).toBeInTheDocument()
     })
